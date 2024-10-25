@@ -2,8 +2,9 @@
  * @author xiyuesaves
  * @date 2024-10-25
  */
-import { options, updateOptions } from "./render_modules/options.js";
-import { first } from "./render_modules/first.js";
+// import { options, updateOptions } from "./render_modules/options.js";
+// import { first } from "./render_modules/first.js";
+import { onConfigView } from "./pages/configView.js";
 /**
  * 根据页面哈希决定加载页面模块
  * @return {void}
@@ -47,24 +48,23 @@ async function onLoad() {
     lite_tools.windowOnload();
   }
 }
-if (Object.keys(options).length > 0) {
-  onLoad();
-} else {
-  console.log("等待配置文件更新");
-  updateOptions(() => {
-    if (first("init")) {
-      onLoad();
-    }
-  });
-}
+
+// if (Object.keys(options).length > 0) {
+//   onLoad();
+// } else {
+//   console.log("等待配置文件更新");
+//   updateOptions(() => {
+//     if (first("init")) {
+//       onLoad();
+//     }
+//   });
+// }
 /**
  * 设置页面入口
  * @param {Element} view 设置页面容器
  */
 function onSettingWindowCreated(view) {
-  import("./pages/configView.js").then((module) => {
-    module.onConfigView(view);
-  });
+  onConfigView(view);
 }
 
 export { onSettingWindowCreated };

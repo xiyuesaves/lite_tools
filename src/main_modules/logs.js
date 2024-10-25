@@ -7,25 +7,27 @@ import { format } from "util";
 import superjson from "superjson";
 import { config, loadConfigPath, onUpdateConfig } from "./config.js";
 
-let cacheLogs = [],
-  toFileCache = [],
-  logFile;
+let cacheLogs = [];
+let toFileCache = [];
+let logFile = null;
+
 class Logs {
   constructor(logName) {
     this.logName = logName;
     return this.log.bind(this);
   }
   log(...args) {
-    if (config?.debug?.mainConsole) {
+    if (config?.debug.mainConsole) {
       console.log(`[${this.logName}]`, ...args);
       cacheLogs.push([`[${this.logName}]`, ...args]);
       writeToFile([`${new Date().toLocaleString()} |`, `[${this.logName}]`, ...args]);
-    } else if (config?.debug?.mainConsole === undefined) {
+    } else if (config?.debug.mainConsole === undefined) {
       cacheLogs.push([`[${this.logName}]`, ...args]);
       toFileCache.push([`${new Date().toLocaleString()} |`, `[${this.logName}]`, ...args]);
     }
   }
 }
+
 class WebLog {
   constructor() {
     this.server = createHttpServer(this.httpHandel.bind(this));

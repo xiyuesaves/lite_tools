@@ -127,11 +127,6 @@ ipcMain.handle("LiteLoader.lite_tools.getUserConfig", () => baseConfig.list);
  */
 ipcMain.on("LiteLoader.lite_tools.deleteUserConfig", (_, uid) => {
   baseConfig.delete(uid);
-  // settingWindow.webContents.send("LiteLoader.lite_tools.onToast", {
-  //   content: `配置已更新，建议立即重启`,
-  //   type: "success",
-  //   duration: "3000",
-  // });
 });
 
 /**
@@ -139,11 +134,6 @@ ipcMain.on("LiteLoader.lite_tools.deleteUserConfig", (_, uid) => {
  */
 ipcMain.on("LiteLoader.lite_tools.addUserConfig", (_, uid, uin) => {
   baseConfig.set(uid, uin);
-  // settingWindow.webContents.send("LiteLoader.lite_tools.onToast", {
-  //   content: `配置已更新，建议立即重启`,
-  //   type: "success",
-  //   duration: "3000",
-  // });
 });
 
 export { config, baseConfig, configFolder, loadUserConfig, updateConfig, configEvent };

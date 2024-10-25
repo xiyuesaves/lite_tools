@@ -1,75 +1,54 @@
-import { initMain, sendIpc } from "./main_modules/initMain.js";
 import { loadUserConfig } from "./main_modules/config.js";
-import { Logs, sendLog, ipcLog } from "./main_modules/logs.js";
-import { addMsgTail } from "./main_modules/addMsgTail.js";
-import { preventEscape } from "./main_modules/preventEscape.js";
-import { replaceMiniAppArk } from "./main_modules/replaceMiniAppArk.js";
-import { keywordReminder } from "./main_modules/keywordReminder.js";
-import { captureWindow } from "./main_modules/captureWindow.js";
-import { messageRecall, discardDeleteActive } from "./main_modules/msgRecall.js";
-import { proxyOn } from "./main_modules/proxyOn.js";
+import { initMain, mainEvent } from "./main_modules/initMain.js";
 
-// 导入独立功能模块
-import "./main_modules/unlockMinSize.js";
-import "./main_modules/updateProxy.js";
-import "./main_modules/wallpaper.js";
-import "./main_modules/initStyle.js";
-import "./main_modules/localEmoticons.js";
-import "./main_modules/getWebPreview.js";
-import "./main_modules/updatePlugins.js";
-import "./main_modules/getTgSticker.js";
-import "./main_modules/extractEifFile.js";
-
-const log = new Logs("main");
-const err = new Logs("Error");
+const log = console.log; //new Logs("main");
+const err = console.log; //new Logs("Error");
 
 /**
- * 是否已经初始化
+ * 是否已加载配置文件
+ * @type {boolean}
  */
-let init = false;
+let isConfigLoaded = false;
 
 /**
  * 处理当浏览器窗口被创建的事件。
  *
  * @param {BrowserWindow} window - 浏览器窗口对象。
- * @return {void} 此函数不返回任何内容。
  */
 function onBrowserWindowCreated(window) {
   try {
-    captureWindow(window);
     proxyIpcMessage(window);
     proxySend(window);
-    preventEscape(window);
-    proxyOn(window);
   } catch (err) {
-    log("出现错误", err);
+    log("onBrowserWindowCreated 出现错误", err.message, err.stack);
   }
 }
 
 /**
  * 将给定 Electron 浏览器窗口的 IPC 消息事件代理到添加自定义行为。
  *
- * @param {Electron.BrowserWindow} window - 要代理其 IPC 消息事件的浏览器窗口。
- * @return {void} 此函数不返回任何内容。
+ * @param {Electron.BrowserWindow} window - 代理其 IPC 消息事件的浏览器窗口。
  */
 function proxyIpcMessage(window) {
-  const ipc_message_proxy = window.webContents._events["-ipc-message"]?.[0] || window.webContents._events["-ipc-message"];
-  const proxyIpcMsg = new Proxy(ipc_message_proxy, {
+  const ipcEvents = window.webContents._events["-ipc-message"];
+  const ipcEventsIsArray = Array.isArray(ipcEvents);
+  const ipcMessageProxy = ipcEventsIsArray ? ipcEvents[0] : ipcEvents;
+
+  if (!ipcMessageProxy) return;
+
+  const proxyIpcMsg = new Proxy(ipcMessageProxy, {
     apply(target, thisArg, args) {
       try {
-        addMsgTail(args);
-        ipcLog(args);
-        if (!discardDeleteActive(args)) {
-          return;
-        }
+        // ...do something
       } catch (err) {
-        log("出现错误", err, err?.stack);
+        log("proxyIpcMessage 出现错误", err.message, err.stack);
       }
       return target.apply(thisArg, args);
     },
   });
-  if (window.webContents._events["-ipc-message"]?.[0]) {
-    window.webContents._events["-ipc-message"][0] = proxyIpcMsg;
+
+  if (ipcEventsIsArray) {
+    ipcEvents[0] = proxyIpcMsg;
   } else {
     window.webContents._events["-ipc-message"] = proxyIpcMsg;
   }
@@ -82,31 +61,31 @@ function proxyIpcMessage(window) {
  * @return {void} 此函数不返回任何内容。
  */
 function proxySend(window) {
-  // 复写并监听ipc通信内容
   const originalSend = window.webContents.send;
+
   window.webContents.send = (...args) => {
-    if (init) {
-      try {
-        messageRecall(args);
-        replaceMiniAppArk(args);
-        keywordReminder(args);
-        sendIpc(args);
-        sendLog(args);
-      } catch (err) {
-        log("出现错误", err, err?.stack);
+    try {
+      if (
+        !isConfigLoaded &&
+        args?.[2]?.[0]?.cmdName === "nodeIKernelSessionListener/onSessionInitComplete" &&
+        args?.[2]?.[0]?.payload?.uid
+      ) {
+        loadUserConfig(args[2][0].payload.uid);
+        initMain();
+        isConfigLoaded = true;
+        log("成功读取配置文件");
       }
-    } else {
-      try {
-        if (args?.[2]?.[0]?.cmdName === "nodeIKernelSessionListener/onSessionInitComplete") {
-          loadUserConfig(args?.[2]?.[0]?.payload?.uid);
-          initMain();
-          log("成功读取配置文件");
-          init = true;
-        }
-      } catch (err) {
-        log("出现错误", err, err?.stack);
+
+      // 如果配置已经加载，或处理其他情况
+      if (isConfigLoaded) {
+        mainEvent.emit("ipc-send", ...args);
+        // ...do something
       }
+    } catch (err) {
+      log("proxySend 出现错误", err.message, err.stack);
     }
+
+    // 始终调用原始的 send 方法
     originalSend.call(window.webContents, ...args);
   };
 }
