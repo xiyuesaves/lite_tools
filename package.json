@@ -1,6 +1,6 @@
 {
   "name": "lite_tools",
-  "version": "2.33.8",
+  "version": "0.0.1",
   "description": "LiteLoaderQQNT 插件 轻量工具箱",
   "main": "esbuild.config.mjs",
   "scripts": {

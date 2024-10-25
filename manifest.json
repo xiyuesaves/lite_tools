@@ -4,7 +4,7 @@
   "name": "工具箱",
   "slug": "p_lite_tools",
   "description": "自用工具集合",
-  "version": "0.0.1",
+  "version": "0.0.1-dev",
   "icon": "./icon.png",
   "authors": [
     {
