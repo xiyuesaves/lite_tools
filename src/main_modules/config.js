@@ -1,51 +1,58 @@
-import { existsSync, mkdirSync, renameSync, writeFileSync } from "fs";
-import { globalBroadcast } from "./globalBroadcast.js";
-import { settingWindow } from "./captureWindow.js";
-import { join } from "path";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+
+import { join } from "node:path";
+import { EventEmitter } from "node:events";
 import { ipcMain } from "electron";
-import { UserConfig } from "./userConfig.js";
-const log = () => {};
+// import { globalBroadcast } from "./globalBroadcast.js";
+// import { settingWindow } from "./captureWindow.js";
+import { BaseConfig } from "./BaseConfig.js";
+
+/**
+ * 事件发射器
+ * @type {EventEmitter}
+ * 事件：update
+ */
+const configEvent = new EventEmitter();
 /**
  * 配置合并模块
  */
 import { recursiveAssignment } from "./recursiveAssignment.js";
 /**
+ * 插件信息
+ */
+import manifest from "../../manifest.json";
+/**
  * 配置模板
  */
-const configTemplate = require("../config/configTemplate.json");
+import configTemplate from "../config/configTemplate.json";
+
 /**
- * 插件配置文件夹路径
+ * 日志模块
  */
-const pluginDataPath = LiteLoader.plugins.lite_tools.path.data;
-/**
- * 默认配置文件路径
- */
-const defaultConfigPath = join(pluginDataPath, "config.json");
-/**
- * 旧配置文件路径
- */
-const oldConfigPath = join(pluginDataPath, "settings.json");
-/**
- * 前置配置文件路径
- */
-const userConfigPath = join(pluginDataPath, "user.json");
-/**
- * 配置文件更新回调函数列表
- */
-const addEventListenderList = new Set();
-/**
- * 当前读取的配置文件夹路径
- */
-let loadConfigPath;
-/**
- * 当前读取的配置文件路径
- */
-let configPath;
+const log = console.log; //() => {};
+
 /**
  * 用户配置
  * @type {Object} 配置数据
  */
-let config = {};
+let config;
+
+/**
+ * 插件配置文件夹路径
+ */
+const pluginDataPath = LiteLoader.plugins[manifest.slug].path.data;
+/**
+ * 前置配置文件路径
+ */
+const baseConfigPath = join(pluginDataPath, "user.json");
+/**
+ * 当前读取的配置文件夹路径
+ */
+let configFolder;
+/**
+ * 当前读取的配置文件路径
+ */
+let configPath;
 /**
  * 初始化配置文件夹
  */
@@ -53,62 +60,41 @@ if (!existsSync(pluginDataPath)) {
   mkdirSync(pluginDataPath, { recursive: true });
 }
 /**
- * 重命名旧的配置文件
- */
-if (existsSync(oldConfigPath)) {
-  renameSync(oldConfigPath, defaultConfigPath);
-}
-/**
  * 读取用户独立配置
  */
-const userConfig = new UserConfig(userConfigPath);
+const baseConfig = new BaseConfig(baseConfigPath);
 /**
  * 加载用户配置
  * @param {String} userId 根据 userId 来判断读取哪个配置文件
  */
 function loadUserConfig(userId) {
-  /**
-   * 独立配置文件路径
-   */
-  const standalonePath = userConfig.get(userId);
-  let loadConfig;
-  if (standalonePath) {
-    log("找到独立配置");
-    loadConfigPath = join(pluginDataPath, standalonePath);
-  } else {
-    log("使用默认配置");
-    loadConfigPath = pluginDataPath;
-  }
-  configPath = join(loadConfigPath, "config.json");
-  if (!existsSync(loadConfigPath)) {
+  // 获取独立配置文件路径
+  const standalonePath = baseConfig.get(userId);
+  configFolder = standalonePath ? join(pluginDataPath, standalonePath) : pluginDataPath;
+
+  log(standalonePath ? "找到独立配置" : "使用默认配置");
+
+  configPath = join(configFolder, "config.json");
+
+  // 初始化配置目录
+  if (!existsSync(configFolder)) {
     log("初始化配置目录");
-    mkdirSync(loadConfigPath, { recursive: true });
+    mkdirSync(configFolder, { recursive: true });
     writeFileSync(configPath, JSON.stringify(configTemplate, null, 2));
   }
+
+  // 读取配置文件
+  let userConfig;
   try {
-    loadConfig = require(configPath);
+    userConfig = JSON.parse(readFileSync(configPath, "utf-8"));
   } catch {
     log("读取配置文件失败，重置为默认配置");
-    loadConfig = configTemplate;
+    userConfig = configTemplate;
     writeFileSync(configPath, JSON.stringify(configTemplate, null, 2));
   }
-  updateConfig(recursiveAssignment(loadConfig, configTemplate));
-}
 
-/**
- * 推送配置更新
- */
-function pushUpdate() {
-  globalBroadcast("LiteLoader.lite_tools.updateOptions", config);
-  addEventListenderList.forEach((callback) => callback(config));
-}
-
-/**
- * 添加配置更新监听
- * @param {Function} callback 配置更新回调
- */
-function onUpdateConfig(callback) {
-  addEventListenderList.add(callback);
+  // 更新配置
+  updateConfig(recursiveAssignment(userConfig, configTemplate));
 }
 
 /**
@@ -116,40 +102,48 @@ function onUpdateConfig(callback) {
  * @param {Object} newConfig 新的配置文件
  */
 function updateConfig(newConfig) {
-  log("更新配置文件", newConfig);
+  log("更新配置文件", configPath);
   config = newConfig;
   writeFileSync(configPath, JSON.stringify(newConfig, null, 2));
-  pushUpdate();
+  configEvent.emit("update", config);
 }
 
 /**
- * 初始化 ipcMain 监听
+ * 同步返回配置文件
  */
 ipcMain.on("LiteLoader.lite_tools.getOptions", (event) => {
-  log("返回配置文件", config);
   event.returnValue = config;
 });
-ipcMain.on("LiteLoader.lite_tools.setOptions", (_, newConfig) => {
-  updateConfig(newConfig);
-});
-ipcMain.handle("LiteLoader.lite_tools.getUserConfig", () => userConfig.list);
 
+ipcMain.on("LiteLoader.lite_tools.setOptions", (_, newConfig) => updateConfig(newConfig));
+
+/**
+ * 获取用户配置，不等同于插件配置
+ */
+ipcMain.handle("LiteLoader.lite_tools.getUserConfig", () => baseConfig.list);
+
+/**
+ * 删除用户独立配置
+ */
 ipcMain.on("LiteLoader.lite_tools.deleteUserConfig", (_, uid) => {
-  userConfig.delete(uid);
-  settingWindow.webContents.send("LiteLoader.lite_tools.onToast", {
-    content: `配置已更新，建议立即重启`,
-    type: "success",
-    duration: "3000",
-  });
+  baseConfig.delete(uid);
+  // settingWindow.webContents.send("LiteLoader.lite_tools.onToast", {
+  //   content: `配置已更新，建议立即重启`,
+  //   type: "success",
+  //   duration: "3000",
+  // });
 });
 
+/**
+ * 添加用户独立配置
+ */
 ipcMain.on("LiteLoader.lite_tools.addUserConfig", (_, uid, uin) => {
-  userConfig.set(uid, uin);
-  settingWindow.webContents.send("LiteLoader.lite_tools.onToast", {
-    content: `配置已更新，建议立即重启`,
-    type: "success",
-    duration: "3000",
-  });
+  baseConfig.set(uid, uin);
+  // settingWindow.webContents.send("LiteLoader.lite_tools.onToast", {
+  //   content: `配置已更新，建议立即重启`,
+  //   type: "success",
+  //   duration: "3000",
+  // });
 });
 
-export { config, userConfig, loadConfigPath, loadUserConfig, updateConfig, onUpdateConfig };
+export { config, baseConfig, configFolder, loadUserConfig, updateConfig, configEvent };
