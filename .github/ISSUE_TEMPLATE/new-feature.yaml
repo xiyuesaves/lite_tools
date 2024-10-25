@@ -1,0 +1,21 @@
+name: 优化提议
+description: 对已有功能进行增强或调整
+title: '[Feat]: '
+labels: [ "enhancement" ]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ❗ | 当前暂不接受新功能请求，详情请查看 [暂停接受新功能请求](https://github.com/xiyuesaves/LiteLoaderQQNT-lite_tools/issues/175)
+        ## ❗ | 针对新功能请求的 issue 将会被直接关闭，如果你有新插件/功能需求，请到 [此处](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/issues/new/choose) 提交
+        ---
+  - type: textarea
+    id: feature-to-add
+    attributes:
+      label: 需要调整的功能内容
+      description: |
+        请想调整的功能，包括实现的模拟（如有）
+        是否有类似的功能已经实现？如有请提出与该功能不同的地方/想改进该功能的哪一部分。
+    validations:
+      required: true

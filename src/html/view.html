@@ -1,0 +1,1426 @@
+<lite-tools class="lite-tools-settings plugins">
+  <h1>功能</h1>
+  <!-- 界面调整 -->
+  <setting-panel class="wrap interface">
+    <div class="vertical-list-item title">
+      <h2>界面调整</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden">
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>自定义字体</h2>
+          <span class="secondary-text">可通过候选框或手动输入字体家族名称启用此功能</span>
+        </div>
+        <div class="fonts-selector setting-select">
+          <input placeholder="未选择" class="setting-input font-input text_color" spellcheck="false" />
+          <div class="font-list setting-option"></div>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>覆盖默认emoji字体</h2>
+          <span class="secondary-text">使用系统或者上方自定义的字体覆盖QQNT自带的emoji字体</span>
+        </div>
+        <div class="overrideEmoji q-switch" data-config="message.overrideEmoji">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>使用系统主题色</h2>
+          <span class="secondary-text">
+            使用系统的主题色覆盖默认颜色，Windows下还支持自动响应系统主题色变化<br />
+            - 此功能可能会覆盖部分主题样式 (仅适用于Windows与macOS)
+          </span>
+        </div>
+        <div class="onlyAvatar q-switch" data-config="appearance.useSystemAccentColor">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>提高优先级</h2>
+          <span class="secondary-text"> 尝试提高主题色优先级来避免被其他主题覆盖 </span>
+        </div>
+        <div class="onlyAvatar q-switch" data-config="appearance.prioritizeColor">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>消息列表只显示头像</h2>
+          <span class="secondary-text">消息列表将隐藏昵称/群名称/最新消息，同时会影响搜索界面 - 此功能会强行覆盖部分主题样式</span>
+        </div>
+        <div class="onlyAvatar q-switch" data-config="message.onlyAvatar">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>阻止主窗口折叠聊天区域</h2>
+          <span class="secondary-text">当主窗口宽度过小时不隐藏聊天区域 - 此功能会在某些情况下重置窗口宽度</span>
+        </div>
+        <div class="unlockMainMinSize q-switch" data-config="message.unlockMainMinSize">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>解除窗口大小限制</h2>
+          <span class="secondary-text">移除所有窗口的最小尺寸限制</span>
+        </div>
+        <div class="q-switch" data-config="unlockMainMinSize">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>头像浮动</h2>
+          <span class="secondary-text">模拟tg头像效果</span>
+        </div>
+        <div class="avatarSticky q-switch">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <div class="disabled-switch avatar-bottom-li">
+        <li class="vertical-list-item sub-item">
+          <div>
+            <h2>连续消息合并</h2>
+            <span class="secondary-text">模拟tg消息效果</span>
+          </div>
+          <div class="mergeMessage q-switch" data-config="message.mergeMessage">
+            <span class="q-switch__handle"></span>
+          </div>
+        </li>
+        <li class="vertical-list-item sub-item">
+          <div>
+            <h2>保留时间</h2>
+            <span class="secondary-text">启用 <strong>连续消息合并</strong> 后保留时间分隔 - 重载消息生效</span>
+          </div>
+          <div class="mergeMessageKeepTime q-switch" data-config="message.mergeMessageKeepTime">
+            <span class="q-switch__handle"></span>
+          </div>
+        </li>
+        <li class="vertical-list-item sub-item">
+          <div>
+            <h2>头像置底</h2>
+            <span class="secondary-text">还原tg头像</span>
+          </div>
+          <div class="avatar-bottom q-switch" data-config="message.avatarSticky.toBottom">
+            <span class="q-switch__handle"></span>
+          </div>
+        </li>
+      </div>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>消息靠左</h2>
+          <span class="secondary-text">自己发送的消息将靠左显示 - 重载消息生效</span>
+        </div>
+        <div class="selfMsgToLeft q-switch" data-config="message.selfMsgToLeft">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>禁用表情推荐</h2>
+          <span class="secondary-text">修复官方设置有时无效的问题</span>
+        </div>
+        <div class="switchSticker q-switch" data-config="message.disabledSticker">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>阻止消息窗口拖拽操作</h2>
+          <span class="secondary-text">避免误触发多选消息</span>
+        </div>
+        <div class="switchDisabledSlideMultipleSelection q-switch" data-config="message.disabledSlideMultipleSelection">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>显示消息发送时间</h2>
+          <span class="secondary-text">显示每一条消息的发送时间 - 重载消息生效</span>
+        </div>
+        <div class="q-switch" data-config="message.showMsgTime">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>显示相对时间</h2>
+          <span class="secondary-text">显示消息发出后距离现在过去了多久，每 30 秒更新一次</span>
+        </div>
+        <div class="q-switch" data-config="message.showMsgElapsedTime">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>时间格式</h2>
+          <span class="secondary-text">可以设置是否显示秒数</span>
+        </div>
+        <div class="setting-select" data-config="message.showMsgTimeFormat">
+          <div class="setting-view text_color show-icon" data-value="未初始化"></div>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+          </svg>
+          <div class="setting-option">
+            <div class="setting-item" data-value="220">hh:mm</div>
+            <div class="setting-item" data-value="222">hh:mm:ss</div>
+          </div>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>日期格式</h2>
+          <span class="secondary-text">如果太长可以配合 <strong>插入到用户名后方</strong> 使用</span>
+        </div>
+        <div class="setting-select" data-config="message.showMsgTimeDateFormat">
+          <div class="setting-view text_color show-icon" data-value="未初始化"></div>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+          </svg>
+          <div class="setting-option show">
+            <div class="setting-item" data-value="000">不显示</div>
+            <div class="setting-item" data-value="011">M/D</div>
+            <div class="setting-item" data-value="022">MM/DD</div>
+            <div class="setting-item" data-value="211">YY/M/D</div>
+            <div class="setting-item" data-value="222">YY/MM/DD</div>
+            <div class="setting-item" data-value="111">YYYY/M/D</div>
+            <div class="setting-item" data-value="122">YYYY/MM/DD</div>
+          </div>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2 title="或许可以避免迷失在时差中...">显示时区</h2>
+          <span class="secondary-text">在时间前面显示当前时区，比如 “GMT +8”</span>
+        </div>
+        <div class="showMsgTimeZone q-switch" data-config="message.showMsgTimeZone">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>插入到用户名后方</h2>
+          <span class="secondary-text">在群组内时将时间插入到用户名后方</span>
+        </div>
+        <div class="showMsgTimeToSenderName q-switch" data-config="message.showMsgTimeToSenderName">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>快速关闭图片</h2>
+          <span class="secondary-text">点击图片关闭查看窗口</span>
+        </div>
+        <div class="switchQuickCloseImage q-switch" data-config="imageViewer.quickClose">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>图片窗口全局拖拽</h2>
+          <span class="secondary-text">旧版功能，针对过大图片无效，无法将窗口拖到屏幕外</span>
+        </div>
+        <div class="touchMove q-switch" data-config="imageViewer.touchMove">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>禁用表情中的GIF热图</h2>
+          <span class="secondary-text">看个人喜好</span>
+        </div>
+        <div class="switchHotGIF q-switch" data-config="message.disabledHotGIF">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>禁用小红点</h2>
+          <span class="secondary-text">移除左侧按钮上的小红点</span>
+        </div>
+        <div class="disabledBadge q-switch" data-config="message.disabledBadge">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>未读气泡显示真实消息数量</h2>
+          <span class="secondary-text">主窗口未读气泡将显示超过99条消息</span>
+        </div>
+        <div class="removeBubbleLimit q-switch" data-config="message.removeBubbleLimit">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>移除vip彩色昵称</h2>
+          <span class="secondary-text">统一页面显示内容</span>
+        </div>
+        <div class="removeVipName q-switch" data-config="message.removeVipName">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>图片自适应窗口宽度</h2>
+          <span class="secondary-text">解除图片大小限制 - 重载消息生效</span>
+        </div>
+        <div class="imageAutoWidth q-switch" data-config="message.imageAutoWidth">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>侧键返回</h2>
+          <span class="secondary-text">按下鼠标返回侧键主窗口将回退到未选择聊天对象时的界面</span>
+        </div>
+        <div class="goBackMainList q-switch" data-config="message.goBackMainList">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>阻止 ESC 关闭窗口</h2>
+          <span class="secondary-text">避免误操作</span>
+        </div>
+        <div class="preventEscape q-switch" data-config="preventEscape">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>窗口使用聊天头像作为图标</h2>
+          <span class="secondary-text">不是任务栏图标，仅限 Windows 系统 - 重启生效</span>
+        </div>
+        <div class="setWindowIcon q-switch" data-config="setWindowIcon">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>移除等级头衔</h2>
+          <span class="secondary-text">移除灰色等级头衔</span>
+        </div>
+        <div class="disableQtag-level q-switch" data-config="disableQtag.level">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>移除自定义头衔</h2>
+          <span class="secondary-text">移除群主设置的紫色头衔</span>
+        </div>
+        <div class="disableQtag-title q-switch" data-config="disableQtag.title">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>移除所有头衔</h2>
+          <span class="secondary-text">移除包括管理在内的所有头衔</span>
+        </div>
+        <div class="disableQtag-all q-switch" data-config="disableQtag.all">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+    </ul>
+  </setting-panel>
+  <!-- 右键菜单 -->
+  <setting-panel class="wrap qContextMenu">
+    <div class="vertical-list-item title">
+      <h2>右键菜单</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden">
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>划词搜索</h2>
+          <span class="secondary-text">选中文本右键搜索对应内容，<strong>%search%</strong> 替换链接中搜索值</span>
+        </div>
+        <div class="switchSelectSearch q-switch">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <div class="disabled-input select-search-url">
+        <div class="vertical-list-item">
+          <input
+            placeholder="https://www.google.com/search?q=%search%"
+            class="search-url input-text text_color"
+            type="text"
+            spellcheck="false"
+          />
+        </div>
+      </div>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>图片搜索</h2>
+          <span class="secondary-text">右键图片搜索，<strong>%search%</strong> 替换链接中搜索值</span>
+        </div>
+        <div class="switchImageSearch q-switch">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <div class="disabled-input image-select-search-url">
+        <div class="vertical-list-item">
+          <input
+            placeholder="https://saucenao.com/search.php?url=%search%"
+            class="img-search-url input-text text_color"
+            type="text"
+            spellcheck="false"
+          />
+        </div>
+      </div>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>消息转图片</h2>
+          <span class="secondary-text">纯文本消息可以转为图片</span>
+        </div>
+        <div class="q-switch" data-config="qContextMenu.messageToImage.enabled">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="select-default-file-path vertical-list-item">
+        <input
+          placeholder="请选择文件夹"
+          title="移除路径"
+          readonly
+          class="select-default-save-file-input-clear input-text text_color"
+          type="text"
+          spellcheck="false"
+        />
+        <div class="ops-btns">
+          <button class="q-button q-button--small q-button--secondary select-default-save-file-input">选择</button>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>高清化</h2>
+          <span class="secondary-text">生成的图片分辨率将会翻倍</span>
+        </div>
+        <div class="highResolution q-switch" data-config="qContextMenu.messageToImage.highResolution">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>选项高亮</h2>
+          <span class="secondary-text"
+            >自定义菜单选项颜色，功能来自<a class="link" data-href="https://github.com/yige-yigeren/LiteLoaderQQNT-HighlightReplies"
+              >HighlightReplies</a
+            >
+            当前接手维护
+          </span>
+        </div>
+        <div class="q-switch" data-config="qContextMenu.HighlightReplies">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>亮色主题</h2>
+          <div class="secondary-text custom-color-light">
+            <div class="custom-color">
+              <label for="lt-light-copy">复制</label>
+              <div class="choose-color">
+                <input id="lt-light-copy" type="color" />
+              </div>
+              <label for="lt-light-forward">转发</label>
+              <div class="choose-color">
+                <input id="lt-light-forward" type="color" />
+              </div>
+              <label for="lt-light-collect">收藏</label>
+              <div class="choose-color">
+                <input id="lt-light-collect" type="color" />
+              </div>
+              <label for="lt-light-multiple">多选</label>
+              <div class="choose-color">
+                <input id="lt-light-multiple" type="color" />
+              </div>
+              <label for="lt-light-quote">引用</label>
+              <div class="choose-color">
+                <input id="lt-light-quote" type="color" />
+              </div>
+              <label for="lt-light-essence">设为精华</label>
+              <div class="choose-color">
+                <input id="lt-light-essence" type="color" />
+              </div>
+              <label for="lt-light-revoke">撤回</label>
+              <div class="choose-color">
+                <input id="lt-light-revoke" type="color" />
+              </div>
+              <label for="lt-light-delete">删除</label>
+              <div class="choose-color">
+                <input id="lt-light-delete" type="color" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>暗色主题</h2>
+          <div class="secondary-text custom-color-dark">
+            <div class="custom-color">
+              <label for="lt-dark-copy">复制</label>
+              <div class="choose-color">
+                <input id="lt-dark-copy" type="color" />
+              </div>
+              <label for="lt-dark-forward">转发</label>
+              <div class="choose-color">
+                <input id="lt-dark-forward" type="color" />
+              </div>
+              <label for="lt-dark-collect">收藏</label>
+              <div class="choose-color">
+                <input id="lt-dark-collect" type="color" />
+              </div>
+              <label for="lt-dark-multiple">多选</label>
+              <div class="choose-color">
+                <input id="lt-dark-multiple" type="color" />
+              </div>
+              <label for="lt-dark-quote">引用</label>
+              <div class="choose-color">
+                <input id="lt-dark-quote" type="color" />
+              </div>
+              <label for="lt-dark-essence">设为精华</label>
+              <div class="choose-color">
+                <input id="lt-dark-essence" type="color" />
+              </div>
+              <label for="lt-dark-revoke">撤回</label>
+              <div class="choose-color">
+                <input id="lt-dark-revoke" type="color" />
+              </div>
+              <label for="lt-dark-delete">删除</label>
+              <div class="choose-color">
+                <input id="lt-dark-delete" type="color" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </setting-panel>
+  <!-- 消息相关 -->
+  <setting-panel class="wrap chatMessage">
+    <div class="vertical-list-item title">
+      <h2>消息相关</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden">
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>消息+1</h2>
+          <span class="secondary-text">人的本质是______ - 重载消息生效</span>
+        </div>
+        <div class="q-switch" data-config="message.replaceBtn">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>双击执行</h2>
+          <span class="secondary-text">避免误触</span>
+        </div>
+        <div class="q-switch" data-config="message.doubleClickReplace">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>回复不带@</h2>
+          <span class="secondary-text">移除回复时自带的@标记</span>
+        </div>
+        <div class="q-switch" data-config="message.removeReplyAt">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>小程序分享转为url卡片</h2>
+          <span class="secondary-text">部分元数据没有携带链接的小程序卡片将不会被转换</span>
+        </div>
+        <div class="q-switch" data-config="message.convertMiniPrgmArk">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>记录离开时的位置</h2>
+          <span class="secondary-text">进入时会自动回到上次离开的位置，但进入时可能会出现短暂闪烁。</span>
+        </div>
+        <div class="q-switch" data-config="message.currentLocation">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>关键词提醒</h2>
+          <span class="secondary-text">当消息中含有指定单词时会记录消息并提醒，只在主窗口生效</span>
+        </div>
+        <div class="keywordReminder q-switch">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <div class="keywordReminder-keyword disabled-input">
+        <div class="vertical-list-item">
+          <input
+            placeholder="使用','分隔关键词"
+            class="keywordReminder-keyword-input input-text text_color"
+            type="text"
+            spellcheck="false"
+          />
+        </div>
+      </div>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>链接预览</h2>
+          <span class="secondary-text">
+            在消息中展示链接预览信息，此功能会自动请求消息中的第一个链接地址<br />并生成一张类似tg中的预览卡片 - 重载消息生效
+          </span>
+        </div>
+        <div class="q-switch" data-config="message.previreUrl.enabled">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>不加载图片</h2>
+          <span class="secondary-text"> 可以减少请求耗时 </span>
+        </div>
+        <div class="q-switch" data-config="message.previreUrl.dontLoadPic">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>图片遮罩</h2>
+          <span class="secondary-text">指定群组/用户发送的图片和视频将被加上磨砂效果，避免公众场合社死 - 重载消息生效</span>
+        </div>
+        <div class="preventNSFW q-switch">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <div class="preventNSFW-keyword disabled-input">
+        <div class="vertical-list-item">
+          <input
+            placeholder="使用','分隔群号/QQ号，不填写默认全局生效"
+            class="preventNSFW-list-input input-text text_color"
+            type="text"
+            spellcheck="false"
+          />
+        </div>
+      </div>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>包括收藏表情</h2>
+          <span class="secondary-text">收藏表情也会被添加遮罩，但官方表情依旧正常显示</span>
+        </div>
+        <div class="q-switch" data-config="message.preventNSFW.includesAnimationEmoticons">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+    </ul>
+  </setting-panel>
+  <!-- 本地表情包 -->
+  <setting-panel class="wrap localEmoticons">
+    <div class="vertical-list-item title">
+      <h2>本地表情</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden">
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>启用本地表情包</h2>
+          <span class="secondary-text">
+            文件路径及名称不能存在特殊字符<br />
+            不推荐使用webp格式的动态表情，这会导致表情窗口异常卡顿<br />
+            可以通过文件夹分组表情包，按住Ctrl可多选表情，按住Alt可直接发送表情
+          </span>
+        </div>
+        <div class="switchLocalEmoticons q-switch">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="disabled-input select-folder-input vertical-list-item">
+        <input
+          placeholder="请选择文件夹"
+          readonly
+          title="移除路径"
+          class="select-local-emoticons-folder-clear input-text text_color"
+          type="text"
+          spellcheck="false"
+        />
+        <div class="ops-btns">
+          <button class="q-button q-button--small q-button--secondary select-local-emoticons-folder">选择</button>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>下载tg贴纸</h2>
+          <span class="secondary-text">
+            使用前需要在 <strong>插件配置</strong> 中填写 <strong>Telegram Bot Token</strong>，<strong>FFmpeg路径</strong>，<strong
+              >tg_to_gif路径</strong
+            >
+            和 <strong>代理地址</strong>
+          </span>
+        </div>
+      </li>
+      <li class="vertical-list-item">
+        <input placeholder="https://t.me/addstickers/*" class="tg-sticker-add-link input-text text_color" type="text" spellcheck="false" />
+        <div class="ops-btns">
+          <button class="q-button q-button--small q-button--secondary tg-sticker-btn">下载</button>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>导入EIF贴纸</h2>
+          <span class="secondary-text"> 由于无法读取文件中的分组数据，因此导入的路径为：本地表情路径/EIF文件名/1,2... </span>
+        </div>
+        <div class="ops-btns">
+          <button class="q-button q-button--small q-button--secondary import-eif-sticker">选择</button>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>移动功能位置</h2>
+          <span class="secondary-text">将本地表情入口移动到功能列表左侧</span>
+        </div>
+        <div class="q-switch" data-config="localEmoticons.toLeftSlot">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>添加右键菜单</h2>
+          <span class="secondary-text">图片右键菜单增加 <strong>保存到本地表情</strong> 选项</span>
+        </div>
+        <div class="copyFileTolocalEmoticons q-switch" data-config="localEmoticons.copyFileTolocalEmoticons">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>内存优化</h2>
+          <span class="secondary-text">适用于加载表情过多的情况，推荐开启</span>
+        </div>
+        <div class="q-switch" data-config="localEmoticons.majorization">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>以图片形式发送</h2>
+          <span class="secondary-text">表情会显示的更大</span>
+        </div>
+        <div class="q-switch" data-config="localEmoticons.sendBigImage">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>使用文件创建时间排序</h2>
+          <span class="secondary-text">表情文件将按照创建时间递减排序，不影响表情文件夹顺序 - 重启功能生效</span>
+        </div>
+        <div class="q-switch" data-config="localEmoticons.timeSort">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>移入显示文件名</h2>
+          <span class="secondary-text">鼠标悬浮在表情图片上将显示文件名称 - 重启功能生效</span>
+        </div>
+        <div class="q-switch" data-config="localEmoticons.showFileName">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>历史表情</h2>
+          <span class="secondary-text">记录最近使用过的指定数量表情在顶部显示</span>
+        </div>
+        <div class="switchCommonlyEmoticons q-switch">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>历史表情保存数量</h2>
+          <span class="secondary-text recommend-num">自定义历史表情保存数量</span>
+        </div>
+        <div class="slot-input-box">
+          <input placeholder="20" class="slot-input commonly-emoticons-num text_color" type="number" spellcheck="false" />
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>移入显示历史表情</h2>
+          <span class="secondary-text recommend-num">鼠标移入本地表情按钮后显示历史表情列表，需要开启 <strong>历史表情</strong> 功能</span>
+        </div>
+        <div class="hoverShowCommonlyEmoticons q-switch" data-config="localEmoticons.hoverShowCommonlyEmoticons">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>最近使用分组前置</h2>
+          <span class="secondary-text recommend-num">
+            将最近使用过的指定数量表情分组前置<br />
+            <strong>1-正无穷</strong> 将到此数字的表情分组设置为按最近使用排序<br />
+            <strong>0</strong> 禁用<br />
+            <strong>-1</strong> 无限制<br />
+            <strong>-2</strong> 锁定当前排序<br />
+            <i
+              >这里的说明可能不太通俗易懂，如果有更好的描述欢迎提:
+              <a class="link" data-href="https://github.com/xiyuesaves/LiteLoaderQQNT-lite_tools/pulls">PR</a></i
+            >
+          </span>
+        </div>
+        <div class="slot-input-box">
+          <input placeholder="0" class="slot-input recent-folders-num text_color" type="number" spellcheck="false" />
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>快捷输入表情</h2>
+          <span class="secondary-text">通过 <strong>自定义快捷键</strong> 唤起浮动表情列表，通过文件名进行筛选</span>
+        </div>
+        <div class="switchQuickEmoticons q-switch">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>自动填充</h2>
+          <span class="secondary-text"><strong>快捷输入表情</strong> 功能筛选只有一个表情时自动填充到输入框</span>
+        </div>
+        <div class="switchQuickEmoticonsAutoInputOnlyOne q-switch" data-config="localEmoticons.quickEmoticonsAutoInputOnlyOne">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>自定义快捷键</h2>
+          <span class="secondary-text">自定义 <strong>快捷输入表情</strong> 功能的快捷键</span>
+        </div>
+        <div class="slot-input-box">
+          <input placeholder="/" class="slot-input quickEmoticonsActiveKey text_color" spellcheck="false" />
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item fl-d">
+        <div>
+          <h2>横排表情数量</h2>
+          <span class="secondary-text">调整横排表情大小</span>
+        </div>
+        <div class="panel-main">
+          <div class="sider">
+            <div class="sider-button"></div>
+            <div class="sider-step">
+              <div class="sider-step-item" data-value="3"></div>
+              <div class="sider-step-item" data-value="4"></div>
+              <div class="sider-step-item" data-value="5"></div>
+              <div class="sider-step-item" data-value="6"></div>
+              <div class="sider-step-item" data-value="7"></div>
+            </div>
+            <div class="sider-mask"></div>
+          </div>
+          <div class="sider-text-wrap">
+            <div class="sider-text">3</div>
+            <div class="sider-text">4</div>
+            <div class="sider-text">5</div>
+            <div class="sider-text">6</div>
+            <div class="sider-text">7</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </setting-panel>
+  <!-- 消息后缀 -->
+  <setting-panel class="wrap messageTail">
+    <div class="vertical-list-item title">
+      <h2>消息后缀</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden">
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>启用</h2>
+          <span class="secondary-text">只有此选项开启的情况下，消息后缀才会生效</span>
+        </div>
+        <div class="q-switch" data-config="tail.enabled">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>后缀提示</h2>
+          <span class="secondary-text">如果聊天对象匹配到了消息后缀，那么将会在发送按钮旁边显示后缀内容</span>
+        </div>
+        <div class="q-switch" data-config="tail.tips">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>规则列表</h2>
+          <span class="secondary-text">规则从上到下匹配，一次只会匹配一个规则</span>
+        </div>
+        <div class="ops-btns">
+          <button class="q-button q-button--small q-button--secondary create-new-tail-item">添加</button>
+        </div>
+      </li>
+      <li class="vertical-list-item">
+        <div class="tail-ruls-list"></div>
+      </li>
+    </ul>
+  </setting-panel>
+  <!-- 阻止撤回 -->
+  <setting-panel class="wrap MessageRecall">
+    <div class="vertical-list-item title">
+      <h2>阻止撤回</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden">
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>启用</h2>
+          <span class="secondary-text">
+            只有此选项开启的情况下，阻止撤回才会生效<br />
+            如果想要拦截被撤回图片，需要配置 <strong>自定义rkey获取地址</strong>
+          </span>
+        </div>
+        <div class="q-switch" data-config="preventMessageRecall.enabled">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>拦截自己的撤回操作</h2>
+          <span class="secondary-text">本人发起的撤回也将被拦截</span>
+        </div>
+        <div class="q-switch" data-config="preventMessageRecall.preventSelfMsg">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>拦截所有群组的撤回事件</h2>
+          <span class="secondary-text">不开启时仅拦截最近打开过的10个聊天对象，启用后会占用更多资源 - 重启生效</span>
+        </div>
+        <div class="q-switch" data-config="preventMessageRecall.blockAllRetractions">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>阻止撤回历史消息</h2>
+          <span class="secondary-text">阻止撤回已被加载过的历史消息</span>
+        </div>
+        <div class="q-switch" data-config="preventMessageRecall.cacheHistory">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>持久化保存</h2>
+          <span class="secondary-text">
+            启用此选项后，所有撤回的消息将以<red>base64</red>格式保存在插件的数据目录中。<br />
+            不启用此选项时撤回数据在重启后丢失，且不受 <strong>删除本地数据</strong> 功能影响。<br />
+            此选项仅保存启用后拦截到的撤回数据，开启前的内容将无法保留。<br />
+            保存在本地的数据并未加密，如果担心消息泄露，请勿启用此功能。<br />
+            关闭此选项后，之前保存在本地的撤回消息也将不会加载。<br />
+            建议每隔一段时间清理一次本地数据。<br />
+          </span>
+        </div>
+        <div class="q-switch" data-config="preventMessageRecall.localStorage">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>重定向图片储存路径</h2>
+          <span class="secondary-text">将被撤回图片保存到插件的配置文件夹下 - 需要配置自定义rkey获取地址</span>
+        </div>
+        <div class="q-switch" data-config="preventMessageRecall.redirectPicPath">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>隐蔽模式</h2>
+          <span class="secondary-text"
+            >不会替换页面中的撤回标记，但可以在 <strong>查看撤回消息</strong> 功能中查看被捕获的消息 - 重载消息生效</span
+          >
+        </div>
+        <div class="q-switch" data-config="preventMessageRecall.stealthMode">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>自定义颜色</h2>
+          <span class="secondary-text">调整撤回消息颜色 - 重载消息生效</span>
+        </div>
+        <div class="q-switch" data-config="preventMessageRecall.customColor">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="vertical-list-item sub-item">
+        <div>
+          <h2>撤回提示颜色</h2>
+          <span class="secondary-text">撤回提示标记显示颜色</span>
+        </div>
+        <div class="custom-text-color">
+          <input title="亮色主题" class="custom-text-color-lite" type="color" />
+          <input title="暗色主题" class="custom-text-color-dark" type="color" />
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>删除本地数据</h2>
+          <span class="secondary-text local-recall-msg-num">清除所有本地保存的撤回数据，当前保存有 0 条消息</span>
+        </div>
+        <div class="ops-btns">
+          <button class="q-button q-button--small q-button--danger clear-localStorage-recall-msg">清除</button>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>查看撤回消息</h2>
+          <span class="secondary-text">只能查看 <strong>持久化保存</strong> 的撤回消息</span>
+        </div>
+        <div class="ops-btns">
+          <button class="q-button q-button--small q-button--secondary open-recall-msg-list">查看</button>
+        </div>
+      </li>
+    </ul>
+  </setting-panel>
+  <!-- 背景功能 -->
+  <setting-panel class="wrap background">
+    <div class="vertical-list-item title">
+      <h2>背景调整</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden">
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>自定义背景</h2>
+          <span class="secondary-text">
+            仅支持单张图片/视频<br />
+            高于 25300 的版本需要先启用官方 <strong>极简素雅</strong> 主题
+          </span>
+        </div>
+        <div class="q-switch" data-config="background.enabled">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <li class="select-path vertical-list-item">
+        <input
+          placeholder="请选择文件"
+          readonly
+          title="移除路径"
+          class="select-background-wallpaper-clear select-file input-text text_color"
+          type="text"
+          spellcheck="false"
+        />
+        <div class="ops-btns">
+          <button class="q-button q-button--small q-button--secondary select-background-wallpaper select-file">选择</button>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>覆盖侧边栏</h2>
+          <span class="secondary-text">背景图片/视频内容覆盖窗口左侧功能栏</span>
+        </div>
+        <div class="q-switch" data-config="background.overlaySiderBar">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>窗口透明</h2>
+          <span class="secondary-text">
+            移除窗口背景层，需要配合
+            <a class="removeMaskLink link" data-href="https://github.com/mo-jinran/more-materials/tree/main">More Materials</a>
+            使用
+          </span>
+        </div>
+        <div class="q-switch" data-config="background.removeMask">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>磨砂效果</h2>
+          <span class="secondary-text">控制输入框等区域的磨砂效果</span>
+        </div>
+        <div class="q-switch" data-config="background.blurFilter">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>增强可读性</h2>
+          <span class="secondary-text">控制输入框等区域用于增强可见性的背景色</span>
+        </div>
+        <div class="q-switch" data-config="background.backgroundVisible">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>背景透明度</h2>
+          <span class="secondary-text">背景图片/视频的透明度，范围为0-100</span>
+        </div>
+        <div class="slot-input-box">
+          <input placeholder="50" class="slot-input background-opacity text_color" type="number" spellcheck="false" />
+        </div>
+      </li>
+    </ul>
+  </setting-panel>
+  <h1>精简</h1>
+  <!-- 侧边栏精简 -->
+  <setting-panel class="wrap sidebar">
+    <div class="vertical-list-item title">
+      <h2>侧边栏</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden"></ul>
+  </setting-panel>
+  <!-- 输入框上方功能精简 -->
+  <setting-panel class="wrap textArea">
+    <div class="vertical-list-item title">
+      <h2>输入框</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden">
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>首次使用需要手动打开群聊/私聊界面一次，并重新打开设置界面</h2>
+        </div>
+      </li>
+    </ul>
+  </setting-panel>
+  <!-- 窗口上方功能精简 -->
+  <setting-panel class="wrap chatArea">
+    <div class="vertical-list-item title">
+      <h2>消息框</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden">
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>首次使用需要手动打开群聊/私聊界面一次，并重新打开设置界面</h2>
+        </div>
+      </li>
+    </ul>
+  </setting-panel>
+  <h1>其他</h1>
+  <setting-panel class="wrap temp-fix">
+    <div class="vertical-list-item title">
+      <h2>插件配置</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden">
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>独立配置文件</h2>
+          <span class="secondary-text">该账号的所有配置数据将被独立保存 - 重启生效</span>
+        </div>
+        <div class="standaloneConfiguration q-switch">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>更新自动重启</h2>
+          <span class="secondary-text">插件更新后，自动重启</span>
+        </div>
+        <div class="q-switch" data-config="autoRelanch">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>不保存登录信息</h2>
+          <span class="secondary-text">下次登录时需要重新填写密码 - 启用后立即生效</span>
+        </div>
+        <div class="q-switch" data-config="resetLoginInfo">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>自定义rkey获取地址</h2>
+          <span class="secondary-text">
+            使用第三方接口获取图片rkey，不填写将使用固定rkey<br />
+            <strong>轻量工具箱不提供该服务，请自行搭建</strong><br />
+            服务搭建参考：<a class="removeMaskLink link" data-href="https://github.com/linyuchen/Lagrange.Core">Lagrange.Core</a>
+          </span>
+        </div>
+      </li>
+      <li class="vertical-list-item">
+        <input placeholder="" class="rkey-api-url input-text text_color" type="text" spellcheck="false" />
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>代理地址</h2>
+          <span class="secondary-text">
+            插件内部分功能请求将使用指定代理访问
+            <span class="test-proxy"></span>
+          </span>
+        </div>
+      </li>
+      <li class="select-default-file-path vertical-list-item">
+        <input
+          placeholder="仅支持http代理地址，例：http://127.0.0.1:7890"
+          class="proxy-url input-text text_color"
+          type="text"
+          spellcheck="false"
+        />
+        <div class="ops-btns">
+          <button class="q-button q-button--small q-button--secondary apply-proxy-url">应用</button>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>FFmpeg路径地址</h2>
+          <span class="secondary-text">
+            用于将TG动态贴纸从视频格式转为GIF，在此处下载：<a class="link" data-href="https://ffmpeg.org/">FFmpeg</a>
+          </span>
+        </div>
+      </li>
+      <li class="select-default-file-path vertical-list-item">
+        <input
+          placeholder="FFmpegPath"
+          title="移除路径"
+          readonly
+          class="select-ffmpeg-path input-text text_color"
+          type="text"
+          spellcheck="false"
+        />
+        <div class="ops-btns">
+          <button class="q-button q-button--small q-button--secondary ffmpeg-path-btn">选择</button>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>TGS转GIF程序路径地址</h2>
+          <span class="secondary-text">
+            用于将TGS格式贴纸转为GIF，在此处下载：<a class="link" data-href="https://github.com/jiongjiongJOJO/tgs_to_gif/releases/latest"
+              >tgs_to_gif</a
+            >
+          </span>
+        </div>
+      </li>
+      <li class="select-default-file-path vertical-list-item">
+        <input
+          placeholder="tgs_to_gif Path"
+          title="移除路径"
+          readonly
+          class="select-tgs-to-gif-path input-text text_color"
+          type="text"
+          spellcheck="false"
+        />
+        <div class="ops-btns">
+          <button class="q-button q-button--small q-button--secondary tgs-to-gif-path-btn">选择</button>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>Telegram Bot Token</h2>
+          <span class="secondary-text">
+            用于下载TG贴纸包，在此处申请：<a class="link" data-href="https://t.me/BotFather">BotFather</a></span
+          >
+        </div>
+      </li>
+      <li class="select-default-file-path vertical-list-item">
+        <input placeholder="token" class="tg-bot-token input-text text_color" type="text" spellcheck="false" />
+      </li>
+    </ul>
+  </setting-panel>
+  <!-- 其他-debug -->
+  <setting-panel class="wrap other">
+    <div class="vertical-list-item title">
+      <h2>调试功能</h2>
+      <svg class="icon is-fold" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 8L12 17L3 8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <ul class="hidden">
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>此菜单内的选项仅用于调试，部分功能可能会导致卡顿、内存泄漏等问题<br /><strong>普通用户请勿开启</strong></h2>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>渲染进程调试</h2>
+        </div>
+        <div class="q-switch" data-config="debug.console">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>主进程调试</h2>
+        </div>
+        <div class="q-switch" data-config="debug.mainConsole">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>动态编译scss</h2>
+        </div>
+        <div class="q-switch" data-config="debug.autoCompileScss">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>web调试</h2>
+        </div>
+        <div class="q-switch" data-config="debug.showWeb">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>显示所有通信数据</h2>
+        </div>
+        <div class="q-switch" data-config="debug.showChannedCommunication">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+      <!-- 开发用 -->
+      <hr class="horizontal-dividing-line" />
+      <li class="vertical-list-item">
+        <div>
+          <h2>保存日志到本地</h2>
+          <span class="secondary-text">
+            <strong>
+              <red> 本地日志含有隐私信息，切勿将日志文件发送给他人！ </red>
+            </strong>
+          </span>
+        </div>
+        <div class="q-switch" data-config="debug.mainConsoleToFile">
+          <span class="q-switch__handle"></span>
+        </div>
+      </li>
+    </ul>
+  </setting-panel>
+  <h1 class="version">当前版本<span class="link tag-version" data-href="https://github.com/xiyuesaves/lite_tools/tree/v4">v0.0.0</span></h1>
+</lite-tools>

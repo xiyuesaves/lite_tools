@@ -1,0 +1,183 @@
+{
+  "debug": {
+    "mainConsoleToFile": false,
+    "console": false,
+    "mainConsole": false,
+    "autoCompileScss": false,
+    "showWeb": false,
+    "showChannedCommunication": false
+  },
+  "keywordReminder": {
+    "enabled": false,
+    "keyList": []
+  },
+  "localEmoticons": {
+    "enabled": false,
+    "quickEmoticons": false,
+    "timeSort": false,
+    "showFileName": false,
+    "quickEmoticonsAutoInputOnlyOne": false,
+    "quickEmoticonsActiveKey": "/",
+    "sendBigImage": false,
+    "majorization": true,
+    "commonlyEmoticons": false,
+    "copyFileTolocalEmoticons": false,
+    "toLeftSlot": false,
+    "hoverShowCommonlyEmoticons": false,
+    "commonlyNum": 20,
+    "recentlyNum": 0,
+    "rowsSize": 5,
+    "ffmpegPath": "",
+    "tgsToGifPath": "",
+    "tgBotToken": "",
+    "localPath": ""
+  },
+  "sidebar": {
+    "top": [],
+    "bottom": []
+  },
+  "imageViewer": {
+    "quickClose": false,
+    "touchMove": false
+  },
+  "message": {
+    "previreUrl": {
+      "enabled": false,
+      "dontLoadPic": false
+    },
+    "goBackMainList": false,
+    "disabledSticker": false,
+    "disabledHotGIF": false,
+    "disabledBadge": false,
+    "disabledSlideMultipleSelection": false,
+    "convertMiniPrgmArk": false,
+    "showMsgTime": false,
+    "showMsgElapsedTime": false,
+    "showMsgTimeFormat": "220",
+    "showMsgTimeDateFormat": "000",
+    "showMsgTimeZone": false,
+    "showMsgTimeToSenderName": false,
+    "replaceBtn": false,
+    "doubleClickReplace": false,
+    "removeReplyAt": false,
+    "mergeMessage": false,
+    "mergeMessageKeepTime": false,
+    "selfMsgToLeft": false,
+    "onlyAvatar": false,
+    "unlockMainMinSize": false,
+    "removeBubbleLimit": false,
+    "removeVipName": false,
+    "imageAutoWidth": false,
+    "currentLocation": false,
+    "overrideFont": {
+      "family": "",
+      "style": "",
+      "fullName": "",
+      "postscriptName": ""
+    },
+    "overrideEmoji": false,
+    "preventNSFW": {
+      "enabled": false,
+      "includesAnimationEmoticons": false,
+      "list": []
+    },
+    "avatarSticky": {
+      "enabled": false,
+      "toBottom": false
+    }
+  },
+  "qContextMenu": {
+    "HighlightReplies": false,
+    "customHighlightReplies": {
+      "light": {
+        "copy": "#000000",
+        "forward": "#000000",
+        "collect": "#000000",
+        "multiple": "#000000",
+        "quote": "#008000",
+        "essence": "#000000",
+        "revoke": "#ff0000",
+        "delete": "#ff0000"
+      },
+      "dark": {
+        "copy": "#ffffff",
+        "forward": "#ffffff",
+        "collect": "#ffffff",
+        "multiple": "#ffffff",
+        "quote": "#008000",
+        "essence": "#ffffff",
+        "revoke": "#ff0000",
+        "delete": "#ff0000"
+      }
+    },
+    "wordSearch": {
+      "enabled": false,
+      "searchUrl": "https://www.bing.com/search?q=%search%"
+    },
+    "imageSearch": {
+      "enabled": false,
+      "searchUrl": "https://saucenao.com/search.php?url=%search%"
+    },
+    "messageToImage": {
+      "enabled": false,
+      "highResolution": false,
+      "path": ""
+    }
+  },
+  "preventMessageRecall": {
+    "enabled": false,
+    "localStorage": false,
+    "customColor": false,
+    "preventSelfMsg": false,
+    "blockAllRetractions": false,
+    "cacheHistory": false,
+    "stealthMode": false,
+    "redirectPicPath": false,
+    "textColor": {
+      "light": "#ff6666",
+      "dark": "#c70000"
+    }
+  },
+  "tail": {
+    "enabled": false,
+    "tips": false,
+    "list": []
+  },
+  "textAreaFuncList": [],
+  "chatAreaFuncList": [],
+  "preventEscape": false,
+  "setWindowIcon": false,
+  "autoRelanch": false,
+  "background": {
+    "overlaySiderBar": false,
+    "removeMask": false,
+    "backgroundVisible": true,
+    "blurFilter": true,
+    "opacity": 0.5,
+    "enabled": false,
+    "url": ""
+  },
+  "global": {
+    "UA": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+    "rkey": "&rkey=CAQSKAB6JWENi5LMk0kc62l8Pm3Jn1dsLZHyRLAnNmHGoZ3y_gDZPqZt-64",
+    "updateUrl": "https://api.github.com/repos/xiyuesaves/LiteLoaderQQNT-lite_tools/releases/latest",
+    "IMAGE_HTTP_HOST": "https://gchat.qpic.cn",
+    "IMAGE_HTTP_HOST_NT": "https://multimedia.nt.qq.com.cn"
+  },
+  "rkeyAPI": "",
+  "proxy": {
+    "enabled": false,
+    "url": ""
+  },
+  "disableQtag": {
+    "level": false,
+    "title": false,
+    "all": false
+  },
+  "appearance": {
+    "useSystemAccentColor": false,
+    "prioritizeColor": false
+  },
+  "resetLoginInfo": false,
+  "unlockMainMinSize": false
+}

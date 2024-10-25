@@ -1,0 +1,31 @@
+{
+  "manifest_version": 4,
+  "type": "extension",
+  "name": "工具箱",
+  "slug": "p_lite_tools",
+  "description": "自用工具集合",
+  "version": "0.0.1",
+  "icon": "./icon.png",
+  "authors": [
+    {
+      "name": "曦月",
+      "link": "https://github.com/xiyuesaves"
+    }
+  ],
+  "platform": [
+    "win32"
+  ],
+  "injects": {
+    "renderer": "./src/renderer.js",
+    "main": "./dist/main.js",
+    "preload": "./src/preload.js"
+  },
+  "repository": {
+    "repo": "xiyuesaves/LiteLoaderQQNT-lite_tools",
+    "branch": "v4",
+    "release": {
+      "tag": "v0.0.1",
+      "file": "p_lite_tools_v4.zip"
+    }
+  }
+}

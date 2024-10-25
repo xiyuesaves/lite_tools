@@ -1,0 +1,94 @@
+name: 提交 Bug
+description: 在使用 轻量工具箱 过程中遇到了问题
+title: "[Bug]: "
+labels: ["bug"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🩵 | 感谢你愿意提交 Bug 报告
+        ## ❗ | 请确定没有相同问题的 issue 已被提出。
+        ## 🌎 | 请准确填写环境信息。
+        ## ✍️ | 为了避免无效 issue 占用大家的时间，**请按真实情况填写下方表单**，谢谢。
+        ---
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 请确保您已阅读以上注意事项，并勾选下方的确认框。
+      options:
+        - label: "该问题是由轻量工具箱单独引起。"
+        - label: "该问题是由多个插件之间互不兼容引起。"
+        - label: "我已经尝试过删除插件的配置文件并重启 QQ，问题依旧存在。"
+          required: true
+        - label: "我已经在 [Issue Tracker](https://github.com/xiyuesaves/LiteLoaderQQNT-lite_tools/issues) 中找过我要提出的问题，没有找到相同问题的 issue。"
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 环境信息
+
+  - type: input
+    id: env-qqnt-ver
+    attributes:
+      label: QQNT 版本
+    validations:
+      required: true
+
+  - type: input
+    id: env-LiteLoaderQQNT-ver
+    attributes:
+      label: LiteLoaderQQNT 版本
+    validations:
+      required: true
+
+  - type: input
+    id: env-Lite_tools-ver
+    attributes:
+      label: 轻量工具箱 版本
+    validations:
+      required: true
+
+  - type: dropdown
+    id: env-vm-ver
+    attributes:
+      label: 运行环境
+      description: 选择系统版本
+      options:
+        - Windows
+        - MacOS
+        - Linux
+    validations:
+      required: true
+
+  - type: textarea
+    id: env-LiteLoaderQQNT-plugins
+    attributes:
+      label: 已安装插件列表（如果你不确定问题出在哪里建议填写）
+
+  - type: textarea
+    id: reproduce-steps
+    attributes:
+      label: 重现步骤
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望的结果是什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际的结果是什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra-desc
+    attributes:
+      label: 补充说明（可选）

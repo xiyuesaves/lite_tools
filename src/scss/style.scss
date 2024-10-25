@@ -1,0 +1,680 @@
+// 全局变量
+:root {
+  --lt-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08) !important;
+  --lt-box-radius: 8px;
+}
+
+// 亮色/暗色主题变量
+@media (prefers-color-scheme: light) {
+  :root {
+    --lt-background-transparent: transparent;
+    --lt-background-color-008: rgba(255, 255, 255, 0.08);
+    --lt-background-color-015: rgba(255, 255, 255, 0.15);
+    --lt-background-color-03: rgba(255, 255, 255, 0.3);
+    --lt-background-color-05: rgba(255, 255, 255, 0.5);
+    --lt-background-color-07: rgba(255, 255, 255, 0.7);
+    --lt-background-color-08: rgba(255, 255, 255, 0.8);
+    --lt-background-color-1: rgba(255, 255, 255, 1);
+    --lt-voice-play-icon: rgba(255, 255, 255, 1);
+    --lt-text-color: rgba(0, 0, 0, 0.8);
+    --lt-link-url-color: rgb(45, 119, 229);
+
+    --lt-ark-title-text-color: rgba(0, 0, 0, 0.4);
+    --lt-ark-desc-text-color: rgb(34, 34, 34);
+    --lt-ark-info-text-color: rgb(178, 178, 178);
+    --lt-ark-border-color: rgba(0, 0, 0, 0.2);
+    --lt-ark-title-color: rgb(3, 8, 26);
+    --lt-ark-info-colo: rgb(135, 139, 153);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --lt-background-transparent: transparent;
+    --lt-background-color-008: rgba(0, 0, 0, 0.08);
+    --lt-background-color-015: rgba(0, 0, 0, 0.15);
+    --lt-background-color-03: rgba(0, 0, 0, 0.3);
+    --lt-background-color-05: rgba(0, 0, 0, 0.5);
+    --lt-background-color-07: rgba(0, 0, 0, 0.7);
+    --lt-background-color-08: rgba(0, 0, 0, 0.8);
+    --lt-background-color-1: rgba(0, 0, 0, 1);
+    --lt-voice-play-icon: rgba(255, 255, 255, 0.6);
+    --lt-text-color: rgba(255, 255, 255, 0.8);
+    --lt-link-url-color: rgb(45, 119, 229);
+
+    --lt-ark-title-text-color: rgba(255, 255, 255, 0.4);
+    --lt-ark-desc-text-color: rgb(255, 255, 255);
+    --lt-ark-info-text-color: rgb(102, 102, 102);
+    --lt-ark-border-color: rgba(255, 255, 255, 0.2);
+    --lt-ark-title-color: rgb(255, 255, 255);
+    --lt-ark-info-colo: rgb(170, 170, 180);
+  }
+}
+
+// 背景透明
+#app {
+  // 移除不受支持的卡片消息背景色
+  .ark-view-message_not-support {
+    background-color: unset;
+  }
+  .q-miracle-background {
+    display: none;
+  }
+  // 移除主窗口背景颜色
+  &.lite-tools-main {
+    // 主容器
+    .tab-container {
+      background-color: unset;
+    }
+    .two-col-layout__aside {
+      // 消息列表
+      .recent-contact {
+        background-color: unset;
+        .viewport-list__inner {
+          background-color: unset;
+        }
+      }
+      // 联系人列表
+      .contact {
+        background-color: unset;
+        .tab-header {
+          background-color: unset;
+        }
+        // 联系人详情
+        .tab-content {
+          .q-collapse-item__header,
+          & > .list-item:not(.list-item--selected) {
+            background-color: unset;
+          }
+        }
+      }
+    }
+    .two-col-layout__main {
+      .profile {
+        background-color: unset;
+      }
+    }
+  }
+  // 移除聊天窗口背景颜色
+  &.lite-tools-chat > .container {
+    background: unset;
+  }
+  // 移除转发窗口背景色
+  &.lite-tools-forward {
+    .draggable-view__container {
+      .title {
+        background: unset;
+      }
+    }
+    #ml-root {
+      background: unset;
+    }
+  }
+}
+
+// 主窗口只有在开启透明效果后才隐藏侧边栏遮罩
+.acrylic {
+  // 侧边栏
+  .lite-tools-main {
+    .sidebar-nav {
+      background-color: unset !important;
+      .sidebar-wrapper {
+        background-color: unset !important;
+      }
+    }
+  }
+}
+// 或者启用覆盖侧边栏
+.lite-tools-main {
+  &.lite-tools-full-wallpaper {
+    // 侧边栏
+    .sidebar-nav {
+      background-color: unset !important;
+      .sidebar-wrapper {
+        background-color: unset !important;
+      }
+    }
+  }
+  // 调整背景元素定位
+  .tab-container {
+    position: relative;
+  }
+}
+
+// 背景元素样式
+.lite-tools-background-wallpaper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: var(--bg_bottom_standard);
+  font-size: 0;
+  &.background-transparent {
+    background-color: unset;
+  }
+  * {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// 文件卡片样式
+.file-message--content {
+  border-radius: var(--lt-box-radius);
+  box-shadow: var(--lt-box-shadow);
+}
+
+/* 消息内容外部块 */
+.message-content__wrapper {
+  overflow: unset;
+}
+
+// 不受支持的小程序样式
+.ark-item-container {
+  .ark-view-message_not-support {
+    background: unset !important;
+    color: var(--lt-text-color) !important;
+  }
+}
+
+/* 统一选中文本样式颜色 */
+*::selection {
+  background: var(--brand_standard) !important;
+}
+
+/* 消息内容块，阻止匹配聊天记录中的元素 */
+:not(.record-msg-detail) > .message {
+  .forward-msg,
+  .msg-content-container,
+  .file-element,
+  .mix-message__container {
+    &:focus .image:after,
+    &:focus:before,
+    .image:focus:after {
+      background: unset !important;
+    }
+    &:not(.wallet-message__container, .hidden-background) {
+      background: unset !important;
+      color: var(--lt-text-color);
+      text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+      box-shadow: var(--lt-box-shadow);
+      overflow: hidden;
+      /* 我的消息 */
+      // &.container--self {
+      // }
+      /* 别人的消息 */
+      // &.container--others {
+      // }
+      &::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: var(--lt-background-color-07);
+        z-index: -1;
+      }
+      .text-link {
+        color: var(--lt-link-url-color);
+      }
+      .reply-element {
+        color: var(--lt-text-color);
+      }
+    }
+  }
+}
+
+/* 修改转发消息定位方式 */
+.forward-msg {
+  position: relative;
+}
+
+/* 语音消息样式 */
+.ptt-element__top-area {
+  .ptt-element__button {
+    background: var(--brand_standard);
+  }
+  .ptt-element__button .q-icon {
+    color: var(--lt-voice-play-icon);
+  }
+  .ptt-element__progress div {
+    background: var(--brand_standard);
+  }
+  .ptt-element__duration {
+    color: var(--brand_standard);
+  }
+  .ptt-element__duration span {
+    transform: translateY(1px);
+  }
+}
+
+/* 跳转到顶部-底部 */
+.chat-msg-area__tip--top-btn,
+.chat-msg-area__tip--bottom {
+  background-color: var(--lt-background-color-05) !important;
+  box-shadow: var(--lt-box-shadow);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  &.theme-primary::after {
+    background-color: var(--brand_standard);
+  }
+}
+
+/* 小程序消息 */
+.ark-msg-content-container {
+  background: unset;
+  font-size: 0;
+  ::after {
+    display: none;
+  }
+}
+
+/* 工具栏项目 */
+.panel-header__action {
+  .side-panel {
+    background-color: var(--lt-background-color-05);
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* 夜间模式增强文本可阅读性 */
+@media (prefers-color-scheme: dark) {
+  // 用户名
+  .user-name {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+  // 灰字内容
+  .message__timestamp,
+  .gray-tip-message {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+  // 消息列表小字
+  .list-item__summary {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+  // 群组右侧列表用户名
+  .group-box__wrapper span:not(.text--link) {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+}
+
+// 背景磨砂效果
+.lite-tools-blur-filter {
+  /* 联系人列表 */
+  .container {
+    .contact {
+      backdrop-filter: blur(8px);
+    }
+    .contact-profile {
+      .profile {
+        backdrop-filter: blur(8px);
+      }
+    }
+  }
+  /* 输入框 */
+  .chat-input-area {
+    z-index: 1;
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      backdrop-filter: blur(8px);
+    }
+  }
+  /* 消息内容外部块 */
+  .message-content__wrapper {
+    overflow: unset !important;
+  }
+  /* 左侧消息列表 */
+  .recent-contact {
+    backdrop-filter: blur(8px);
+  }
+
+  :not(.record-msg-detail) > .message {
+    .forward-msg,
+    .msg-content-container,
+    .file-element,
+    .mix-message__container {
+      &:not(.wallet-message__container, .hidden-background) {
+        &::after {
+          backdrop-filter: blur(28px);
+          background-color: var(--lt-background-color-05);
+        }
+      }
+    }
+  }
+}
+
+// 可读性增强背景
+.lite-tools-background-visible {
+  .chat-input-area {
+    background: var(--lt-background-color-03);
+  }
+  /* 群组右侧列表 */
+  .group-box__wrapper {
+    background-color: var(--lt-background-color-03);
+  }
+  /* 左侧消息列表 */
+  .recent-contact {
+    background-color: var(--lt-background-color-03) !important;
+  }
+}
+
+// 优化文件图标样式
+.file-status {
+  .q-svg-icon {
+    background-color: var(--lt-background-color-05) !important;
+    backdrop-filter: blur(28px);
+    cursor: pointer;
+    svg {
+      transform: scale(0.8);
+    }
+  }
+}
+
+// 给外部插槽添加半透明背景和磨砂效果
+.lite-tools-slot.outside-slot::after,
+.message-content-replace.single::after {
+  box-shadow: var(--lt-box-shadow);
+  backdrop-filter: blur(28px);
+}
+
+// 覆盖卡片消息样式
+.lite-tools-cover-canvas {
+  margin: unset !important;
+  * {
+    user-select: none;
+  }
+  img {
+    pointer-events: none;
+  }
+  .lite-tools-ark-card {
+    display: block;
+  }
+  .ark-item-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: unset !important;
+    min-width: unset !important;
+    height: 100% !important;
+    width: 100% !important;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .lite-tools-miniapp-ark-card {
+    width: 280px;
+    height: 296px;
+    border-radius: 8px;
+    padding-top: 12px;
+    box-sizing: border-box;
+    cursor: pointer;
+    .title {
+      width: 100%;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 0 12px;
+      .app-icon {
+        height: 16px;
+        width: 16px;
+      }
+      .app-name {
+        font-size: 12px;
+        margin-left: 4px;
+        color: var(--lt-ark-title-text-color);
+      }
+    }
+    .share-title {
+      padding: 0 12px;
+      font-size: 14px;
+      text-indent: -1px;
+      color: var(--lt-ark-desc-text-color);
+      margin-bottom: 4px;
+    }
+    .share-pic {
+      padding: 0 8px;
+      width: 100%;
+      height: 195px;
+      margin-bottom: 9px;
+      img {
+        width: 100%;
+        height: 100%;
+        // object-fit: cover;
+        border-radius: 6px;
+      }
+    }
+    .bottom-info {
+      width: calc(100% - 20px);
+      height: 30px;
+      margin: 0 12px;
+      font-size: 12px;
+      color: var(--lt-ark-title-text-color);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      box-sizing: border-box;
+      border-top: solid 1px var(--lt-ark-border-color);
+      padding: 0 3px;
+      .miniapp-name {
+        width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .miniapp-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+  .lite-tools-url-ark-card {
+    width: 251px;
+    height: 136px;
+    border-radius: 8px;
+    padding: 13px 12px 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    & > .title {
+      display: block;
+      width: 100%;
+      font-size: 14px;
+      color: var(--lt-ark-title-color);
+      margin-bottom: 10px;
+    }
+    .desc {
+      width: 100%;
+      height: 52px;
+      display: flex;
+      font-size: 12px;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      .desc-text {
+        color: var(--lt-ark-info-colo);
+        word-break: break-all;
+        line-height: 19px;
+        width: 168px;
+        height: 40px;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+      .desc-img {
+        width: 52px;
+        height: 52px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 6px;
+        }
+      }
+    }
+    .bottom {
+      width: 100%;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-top: solid 1px var(--lt-ark-border-color);
+      box-sizing: border-box;
+      font-size: 12px;
+      color: var(--lt-ark-title-text-color);
+      .icon {
+        width: 14px;
+        height: 14px;
+        margin-right: 4px;
+      }
+      .title {
+        display: block;
+        width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+  .lite-tools-contact-ark-card {
+    cursor: pointer;
+    width: 260px;
+    height: auto;
+    border-radius: 8px;
+    padding: 12px 12px 0;
+    box-sizing: border-box;
+    .desc {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+      .user-avatar {
+        width: 56px;
+        height: 56px;
+        margin-right: 8px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      .user-detail {
+        width: 140px;
+        height: auto;
+        .lt-user-name {
+          color: var(--lt-ark-desc-text-color);
+          display: block;
+          font-size: 14px;
+          margin-bottom: 4px;
+        }
+        .lt-user-uid {
+          color: var(--lt-ark-title-text-color);
+          display: block;
+          font-size: 12px;
+        }
+      }
+    }
+    .bottom {
+      width: 100%;
+      border-top: solid 1px var(--lt-ark-border-color);
+      height: 26px;
+      color: var(--lt-ark-title-text-color);
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      font-size: 12px;
+      .user-icon {
+        width: 14px;
+        height: 14px;
+        margin-right: 4px;
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .title {
+        display: block;
+        width: 210px;
+      }
+    }
+  }
+  .lite-tools-troopshare-ark-card {
+    cursor: pointer;
+    width: 240px;
+    height: 92px;
+    border-radius: 8px;
+    padding: 10px 12px 0;
+    box-sizing: border-box;
+    .desc {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 8px;
+      .troop-avatar {
+        width: 48px;
+        height: 48px;
+        margin-right: 8px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      .troop-detail {
+        width: 140px;
+        height: auto;
+        .troop-name {
+          display: block;
+          width: 100%;
+          color: var(--lt-ark-desc-text-color);
+          display: block;
+          font-size: 14px;
+          margin-bottom: 4px;
+        }
+        .troop-uid {
+          color: var(--lt-ark-title-text-color);
+          display: block;
+          font-size: 12px;
+        }
+      }
+    }
+    .bottom {
+      width: 100%;
+      border-top: solid 1px var(--lt-ark-border-color);
+      height: 26px;
+      color: var(--lt-ark-title-text-color);
+      display: flex;
+      align-items: center;
+      font-size: 11px;
+      .user-icon {
+        width: 13px;
+        height: 13px;
+        margin-right: 4px;
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}

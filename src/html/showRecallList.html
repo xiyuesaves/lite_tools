@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>撤回消息查看</title>
+    <style>
+      .dark-mode .msg-list {
+        background-color: var(--sidebar-bg-color); /* 暗色背景 */
+      }
+
+      .dark-mode .msg-content {
+        background-color: #1a1a1a; /* 暗色消息背景 */
+        color: #f4f4f4; /* 暗色文本 */
+      }
+
+      ::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: darkgrey; /* 设置滚动条的背景颜色 */
+        border-radius: 10px; /* 设置滚动条的圆角 */
+      }
+
+      *::-webkit-scrollbar-thumb {
+        background-color: transparent;
+      }
+      *:hover::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb-color); /* 设置滚动条在悬停时的颜色 */
+      }
+
+      :root {
+        --sider-bar-minwidth: 250px;
+        --sider-bar-widhth: 30%;
+        --sider-bar-maxwidth: 350px;
+
+        --scrollbar-thumb-color: #0000001a;
+
+        --sidebar-active-bg-color: #0099ff; /* 侧边栏选中背景 */
+        --sidebar-active-text-color: #ffffff; /* 侧边栏选中文本 */
+        --sidebar-bg-color: #ffffff; /* 侧边栏背景 */
+        --sidebar-text-color: #111111; /* 侧边栏背景 */
+
+        --msg-content-bg-color: #ffffff; /* 消息内容背景 */
+        --msg-content-text-color: #111111; /* 消息内容文本 */
+        --msg-img-item-bg-color: #f2f2f2; /* 消息图片背景 */
+        --content-list-bg-color: #f2f2f2; /* 消息列表背景 */
+      }
+
+      /* 系统暗色主题样式 */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --scrollbar-thumb-color: #ffffff3d;
+
+          --sidebar-active-bg-color: #0d6ecf; /* 侧边栏选中背景 */
+          --sidebar-active-text-color: #ffffffe6; /* 侧边栏选中文本 */
+          --sidebar-bg-color: #1b1b1b; /* 侧边栏背景 */
+          --sidebar-text-color: #ffffffe6; /* 侧边栏背景 */
+
+          --msg-content-bg-color: #262626; /* 消息内容背景 */
+          --msg-content-text-color: #ffffffe6; /* 消息内容文本 */
+          --msg-img-item-bg-color: #111111; /* 消息图片背景 */
+          --content-list-bg-color: #111111; /* 消息列表背景 */
+        }
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        user-select: none;
+        background-color: var(--main-bg-color);
+      }
+
+      .data {
+        width: 100%;
+        height: 100vh;
+        box-sizing: border-box;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+
+      .qq-number-filter {
+        width: var(--sider-bar-widhth);
+        min-width: var(--sider-bar-minwidth);
+        max-width: var(--sider-bar-maxwidth);
+        max-height: 100%;
+        height: 100vh;
+        overflow: auto;
+        background-color: var(--sidebar-bg-color);
+        padding: 10px 6px;
+        box-sizing: border-box;
+      }
+
+      .filter-item {
+        cursor: pointer;
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 6px 8px;
+        justify-content: flex-start;
+        font-size: 14px;
+        color: var(--sidebar-text-color);
+        border-radius: 4px;
+        transition: 0.15s ease;
+      }
+
+      .filter-item span {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-right: 2px;
+      }
+      .filter-item span:first-child,
+      .filter-item span:last-child {
+        flex-shrink: 0;
+      }
+      .filter-item.active {
+        background-color: var(--sidebar-active-bg-color);
+        color: var(--sidebar-active-text-color);
+      }
+
+      .msg-list {
+        width: calc(100% - min(var(--sider-bar-widhth), var(--sider-bar-maxwidth)));
+        max-width: calc(100% - var(--sider-bar-minwidth));
+        min-width: 400px;
+        padding: 20px 10px;
+        height: 100vh;
+        overflow: auto;
+        overflow: auto;
+        box-sizing: border-box;
+        background-color: var(--content-list-bg-color);
+      }
+      .msg-item {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-bottom: 12px;
+      }
+      .msg-box {
+        width: auto;
+        max-width: calc(100% - 32px);
+      }
+      .user-name {
+        margin: 0;
+        font-size: 12px;
+        padding-left: 8px;
+        color: var(--msg-content-text-color);
+      }
+      .msg-content {
+        width: 100%;
+        margin-top: 4px;
+        height: auto;
+        background-color: var(--msg-content-bg-color);
+        color: var(--msg-content-text-color);
+        border-radius: 8px;
+        font-size: 14px;
+        box-sizing: border-box;
+        padding: 8px 10px;
+        cursor: pointer;
+      }
+      .msg-text-box {
+        width: 100%;
+        height: auto;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        font-size: 14px;
+        /* line-height: 21px; */
+        min-height: 18px;
+      }
+      .msg-img-list {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+      .msg-img-item {
+        width: 132px;
+        height: 132px;
+        margin-right: 4px;
+        margin-bottom: 4px;
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: var(--msg-img-item-bg-color);
+      }
+      .msg-img-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .msg-text {
+        margin: 0;
+        word-break: break-all;
+      }
+      .tail {
+        right: 0px;
+        float: right;
+        font-size: 12px;
+        line-height: 16px;
+        width: auto;
+        text-align: right;
+        margin-left: 6px;
+        white-space: nowrap;
+        visibility: hidden;
+        user-select: none;
+      }
+      .tail::after {
+        content: attr(time);
+        visibility: visible;
+        position: absolute;
+        display: block;
+        width: auto;
+        text-align: right;
+        font-size: 12px;
+        line-height: 11px;
+        bottom: 0;
+        right: 0;
+        opacity: 0.6;
+      }
+      /* debug 日志 */
+      .logs {
+        top: 0;
+        left: 0;
+        z-index: 100;
+        background-color: black;
+        color: #ffffff;
+        height: 50%;
+        width: 100%;
+        overflow: auto;
+        opacity: 0.8;
+        pointer-events: none;
+        opacity: 0;
+        height: 0 !important;
+        max-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logs"></div>
+    <div class="data">
+      <div class="qq-number-filter">
+        <div class="filter-item loading-tips">
+          <span class="peer-name">加载数据中...</span>
+        </div>
+      </div>
+      <div class="msg-list"></div>
+    </div>
+  </body>
+  <script src="../pages/showRecallList.js" type="module"></script>
+</html>

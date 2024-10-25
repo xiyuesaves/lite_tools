@@ -1,0 +1,8 @@
+node_modules
+.VSCodeCounter
+.vscode
+package-lock.json
+pnpm-lock.yaml
+changeLog.md
+css
+dist
