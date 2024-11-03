@@ -15,9 +15,13 @@ ipcMain.emit = ipcMain.emit.bind(ipcMain);
 
 function initMain() {
   log("初始化主进程");
+}
 
-  // 通用ipc事件处理
-
+/**
+ * 初始化 IPC 通信
+ */
+function initializeIPCCommunication() {
+  log("初始化IPC通信");
   // 打开网址
   ipcMain.on("LiteLoader.lite_tools.openWeb", (_, url) => {
     shell.openExternal(url);
@@ -91,14 +95,13 @@ function initMain() {
   // 获取用户信息事件
   ipcMain.handle("LiteLoader.lite_tools.getUserInfo", async (_, uid) => {
     const userInfo = await new Promise((resolve) => {
-      
       const onEvent = (channel, ...args) => {
         if (channel === "IPC_DOWN_2" && args[1]?.[0]?.cmdName === "onProfileSimpleChanged") {
           mainEvent.off("ipc-send", onEvent);
           resolve(args[1]);
         }
       };
-  
+
       mainEvent.on("ipc-send", onEvent);
 
       ipcMain.emit("IPC_UP_2", {}, { type: "request", callbackId: randomUUID(), eventName: "ns-ntApi-2" }, [
@@ -111,7 +114,6 @@ function initMain() {
         },
         undefined,
       ]);
-
     });
     return userInfo;
   });
@@ -190,8 +192,10 @@ function initMain() {
   // 获取rkey
   ipcMain.handle("LiteLoader.lite_tools.getRkey", async (_, chatType) => {
     //const chatTypeStr = chatType === 2 ? "group_rkey" : "private_rkey";
+    log(chatType);
     return "false"; // await getRkey(chatTypeStr);
   });
 }
+initializeIPCCommunication();
 
 export { initMain, mainEvent };
