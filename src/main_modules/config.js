@@ -29,7 +29,7 @@ import configTemplate from "../config/configTemplate.json";
 /**
  * 日志模块
  */
-const log = console.log; //() => {};
+const log = () => {};
 
 /**
  * 用户配置
