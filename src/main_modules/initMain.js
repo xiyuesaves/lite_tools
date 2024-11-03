@@ -4,8 +4,8 @@ import { normalize, join } from "path";
 import { randomUUID } from "crypto";
 import { config, updateConfig } from "./config.js";
 // import { getRkey } from "./getRkey.js";
-// import { Logs } from "./logs.js";
-const log = console.log; //new Logs("initMain");
+import { Logs } from "./logs.js";
+const log = new Logs("initMain");
 
 import { EventEmitter } from "node:events";
 const mainEvent = new EventEmitter();

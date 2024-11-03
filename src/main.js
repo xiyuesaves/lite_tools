@@ -1,8 +1,9 @@
 import { loadUserConfig } from "./main_modules/config.js";
 import { initMain, mainEvent } from "./main_modules/initMain.js";
+import { Logs } from "./main_modules/logs.js";
 
-const log = console.log; //new Logs("main");
-const err = console.log; //new Logs("Error");
+const log = new Logs("main");
+const err = new Logs("Error");
 
 /**
  * 是否已加载配置文件
