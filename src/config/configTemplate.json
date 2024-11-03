@@ -1,6 +1,5 @@
 {
   "debug": {
-    "mainConsoleToFile": false,
     "console": false,
     "mainConsole": false,
     "autoCompileScss": false,
