@@ -3,8 +3,8 @@ import * as sass from "sass";
 import { getAllRelease } from "./createChangeLog.mjs";
 import fs from "fs";
 let thisTime = new Date().getTime();
-const lite_tools = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
-const manifest_json = JSON.parse(fs.readFileSync("./manifest.json", "utf-8"));
+const packageJSON = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
+const manifestJSON = JSON.parse(fs.readFileSync("./manifest.json", "utf-8"));
 const args = process.argv.slice(2);
 let isDev = args.includes("--dev");
 let isPush = args.includes("--push");
@@ -42,15 +42,15 @@ fs.writeFileSync("./src/css/view.css", sass.compile("./src/scss/view.scss").css)
 console.log(`编译scss耗时：${(new Date().getTime() - thisTime) / 1000} s`);
 
 // 更新版本号
-console.log(`更新 manifest.json 版本号为 ${lite_tools.version}`);
+console.log(`更新 manifest.json 版本号为 ${packageJSON.version}`);
 if (isPush) {
-  manifest_json.injects.main = "./src/nobuild.js";
+  manifestJSON.injects.main = "./src/nobuild.js";
 } else {
-  manifest_json.injects.main = "./dist/main.js";
+  manifestJSON.injects.main = "./dist/main.js";
 }
-manifest_json.version = `${lite_tools.version}${isDev ? "-dev" : ""}`;
-manifest_json.repository.release.tag = `v${lite_tools.version}`;
-fs.writeFileSync("./manifest.json", JSON.stringify(manifest_json, null, 2));
+manifestJSON.version = `${packageJSON.version}${isDev ? "-dev" : ""}`;
+manifestJSON.repository.release.tag = `v${packageJSON.version}`;
+fs.writeFileSync("./manifest.json", JSON.stringify(manifestJSON, null, 2));
 
 // 生成更新日志
 if (!isDev && !isPush) {
