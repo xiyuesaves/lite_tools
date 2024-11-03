@@ -1,15 +1,13 @@
 import { shell } from "electron";
-import { createServer as createHttpServer } from "http";
-import { createServer as creatNetServer } from "net";
-import { readFileSync, createWriteStream, existsSync, mkdirSync } from "fs";
-import { join } from "path";
-import { format } from "util";
+import { createServer as createHttpServer } from "node:http";
+import { createServer as creatNetServer } from "node:net";
+import { readFileSync } from "node:fs";
 import superjson from "superjson";
-import { config, loadConfigPath, onUpdateConfig } from "./config.js";
+import manifest from "../../manifest.json";
+import { config, configEvent } from "./config.js";
 
+// 配置文件加载前缓存日志信息
 let cacheLogs = [];
-let toFileCache = [];
-let logFile = null;
 
 class Logs {
   constructor(logName) {
@@ -19,12 +17,8 @@ class Logs {
   log(...args) {
     if (config?.debug.mainConsole) {
       console.log(`[${this.logName}]`, ...args);
-      cacheLogs.push([`[${this.logName}]`, ...args]);
-      writeToFile([`${new Date().toLocaleString()} |`, `[${this.logName}]`, ...args]);
-    } else if (config?.debug.mainConsole === undefined) {
-      cacheLogs.push([`[${this.logName}]`, ...args]);
-      toFileCache.push([`${new Date().toLocaleString()} |`, `[${this.logName}]`, ...args]);
     }
+    cacheLogs.push([`[${this.logName}]`, ...args]);
   }
 }
 
@@ -42,11 +36,11 @@ class WebLog {
       res.end(log);
     } else if (req.url === "/debug" && req.method === "GET") {
       res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Access-Control-Allow-Origin": "*" });
-      const html = readFileSync(`${LiteLoader.plugins.lite_tools.path.plugin}/src/html/debug.html`, "utf-8");
+      const html = readFileSync(`${LiteLoader.plugins[manifest.slug].path.plugin}/src/html/debug.html`, "utf-8");
       res.end(html);
     } else if (req.url === "/debug.js" && req.method === "GET") {
       res.writeHead(200, { "Content-Type": "application/javascript; charset=utf-8", "Access-Control-Allow-Origin": "*" });
-      const js = readFileSync(`${LiteLoader.plugins.lite_tools.path.plugin}/dist/debug.js`, "utf-8");
+      const js = readFileSync(`${LiteLoader.plugins[manifest.slug].path.plugin}/dist/debug.js`, "utf-8");
       res.end(js);
     } else {
       // 处理其他请求
@@ -78,77 +72,36 @@ class WebLog {
 }
 const webLog = new WebLog();
 
-onUpdateConfig(() => {
-  if (config.debug.showWeb) {
+configEvent.on("update", (newConfig) => {
+  if (newConfig.debug.showWeb) {
     webLog.start();
   } else {
     webLog.stop();
-  }
-
-  if (!config.debug.mainConsole) {
     cacheLogs = [];
-  }
-
-  if (config.debug.mainConsoleToFile) {
-    if (!logFile) {
-      const logFolder = join(loadConfigPath, "logs");
-      const logFilePath = join(logFolder, `${formatDate()}.log`);
-      if (!existsSync(logFolder)) {
-        mkdirSync(logFolder, { recursive: true });
-      }
-      logFile = createWriteStream(logFilePath, { flags: "a" });
-      if (!config.debug.showChannedCommunication) {
-        toFileCache = toFileCache.filter((log) => !["[get]", "[send]"].includes(log[1]));
-        cacheLogs = cacheLogs.filter((log) => !["[get]", "[send]"].includes(log[1]));
-      }
-      toFileCache.forEach((log) => {
-        logFile.write(format(...log) + "\n");
-      });
-    }
-    toFileCache = [];
-  } else {
-    toFileCache = [];
-    logFile = null;
   }
 });
 
 function sendLog(args) {
-  if (config?.debug?.showChannedCommunication) {
+  if (!config || config?.debug.showChannedCommunication) {
     cacheLogs.push(["[send]", ...args]);
-    writeToFile([`${new Date().toLocaleString()} |`, `[send]`, ...args]);
-  } else if (config?.debug?.showChannedCommunication === undefined) {
-    cacheLogs.push(["[send]", ...args]);
-    toFileCache.push([`${new Date().toLocaleString()} |`, "[send]", ...args]);
   }
 }
 
 function ipcLog(args) {
-  if (config?.debug?.showChannedCommunication) {
+  if (!config || config?.debug.showChannedCommunication) {
     cacheLogs.push(["[get]", ...args]);
-    writeToFile([`${new Date().toLocaleString()} |`, `[get]`, ...args]);
-  } else if (config?.debug?.showChannedCommunication === undefined) {
-    cacheLogs.push(["[get]", ...args]);
-    toFileCache.push([`${new Date().toLocaleString()} |`, "[get]", ...args]);
   }
 }
 
-function writeToFile(args) {
-  if (config.debug.mainConsoleToFile && logFile) {
-    logFile.write(format(...args) + "\n");
-  }
-}
+// function pad(number) {
+//   return number < 10 ? "0" + number : number;
+// }
 
-function formatDate(date) {
-  if (!date) {
-    date = new Date();
-  }
-  function pad(number) {
-    return number < 10 ? "0" + number : number;
-  }
-  const year = date.getFullYear();
-  const month = pad(date.getMonth() + 1);
-  const day = pad(date.getDate());
-  return `${year}-${month}-${day}`;
-}
+// function formatDate(date = new Date()) {
+//   const year = date.getFullYear();
+//   const month = pad(date.getMonth() + 1);
+//   const day = pad(date.getDate());
+//   return `${year}-${month}-${day}`;
+// }
 
-export { Logs, webLog, sendLog, ipcLog };
+export { Logs, sendLog, ipcLog };
