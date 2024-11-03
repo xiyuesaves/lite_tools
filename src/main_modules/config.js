@@ -35,7 +35,7 @@ const log = console.log; //() => {};
  * 用户配置
  * @type {Object} 配置数据
  */
-let config;
+let config = null;
 
 /**
  * 插件配置文件夹路径
@@ -70,7 +70,7 @@ const baseConfig = new BaseConfig(baseConfigPath);
 function loadUserConfig(userId) {
   // 获取独立配置文件路径
   const standalonePath = baseConfig.get(userId);
-  configFolder = standalonePath ? join(pluginDataPath, standalonePath) : pluginDataPath;
+  configFolder = standalonePath ? join(pluginDataPath, standalonePath) : join(pluginDataPath, "default-config");
 
   log(standalonePath ? "找到独立配置" : "使用默认配置");
 
@@ -84,9 +84,10 @@ function loadUserConfig(userId) {
   }
 
   // 读取配置文件
-  let userConfig;
+  let userConfig = null;
   try {
-    userConfig = JSON.parse(readFileSync(configPath, "utf-8"));
+    const fileConfig = JSON.parse(readFileSync(configPath, "utf-8"));
+    userConfig = recursiveAssignment(fileConfig, configTemplate);
   } catch {
     log("读取配置文件失败，重置为默认配置");
     userConfig = configTemplate;
@@ -94,7 +95,7 @@ function loadUserConfig(userId) {
   }
 
   // 更新配置
-  updateConfig(recursiveAssignment(userConfig, configTemplate));
+  updateConfig(userConfig);
 }
 
 /**
@@ -103,9 +104,9 @@ function loadUserConfig(userId) {
  */
 function updateConfig(newConfig) {
   log("更新配置文件", configPath);
+  configEvent.emit("update", newConfig);
   config = newConfig;
   writeFileSync(configPath, JSON.stringify(newConfig, null, 2));
-  configEvent.emit("update", config);
 }
 
 /**
@@ -115,25 +116,24 @@ ipcMain.on("LiteLoader.lite_tools.getOptions", (event) => {
   event.returnValue = config;
 });
 
+/**
+ * 设置插件配置
+ */
 ipcMain.on("LiteLoader.lite_tools.setOptions", (_, newConfig) => updateConfig(newConfig));
 
 /**
- * 获取用户配置，不等同于插件配置
+ * 获取用户独立配置
  */
 ipcMain.handle("LiteLoader.lite_tools.getUserConfig", () => baseConfig.list);
 
 /**
  * 删除用户独立配置
  */
-ipcMain.on("LiteLoader.lite_tools.deleteUserConfig", (_, uid) => {
-  baseConfig.delete(uid);
-});
+ipcMain.on("LiteLoader.lite_tools.deleteUserConfig", (_, uid) => baseConfig.delete(uid));
 
 /**
  * 添加用户独立配置
  */
-ipcMain.on("LiteLoader.lite_tools.addUserConfig", (_, uid, uin) => {
-  baseConfig.set(uid, uin);
-});
+ipcMain.on("LiteLoader.lite_tools.addUserConfig", (_, uid, uin) => baseConfig.set(uid, uin));
 
 export { config, baseConfig, configFolder, loadUserConfig, updateConfig, configEvent };
