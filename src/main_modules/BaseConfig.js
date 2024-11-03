@@ -1,16 +1,12 @@
-import { existsSync, writeFileSync, readFileSync } from "node:fs";
+import { writeFileSync, readFileSync } from "node:fs";
 
 export class BaseConfig {
   constructor(userConfigPath) {
     this.userConfigPath = userConfigPath;
     this.list = null;
-    if (existsSync(this.userConfigPath)) {
-      try {
-        this.list = new Map(JSON.parse(readFileSync(this.userConfigPath, "utf-8")));
-      } catch {
-        this.initialConfigFile();
-      }
-    } else {
+    try {
+      this.list = new Map(JSON.parse(readFileSync(this.userConfigPath, "utf-8")));
+    } catch {
       this.initialConfigFile();
     }
   }

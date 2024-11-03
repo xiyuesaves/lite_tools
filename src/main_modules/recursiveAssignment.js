@@ -11,11 +11,6 @@ function recursiveAssignment(fileOptions, defaultOptions) {
   let obj = {};
   for (const key in defaultOptions) {
     if (Object.hasOwnProperty.call(defaultOptions, key)) {
-      // 如果是全局属性则直接覆盖配置文件
-      if (key === "global") {
-        obj[key] = defaultOptions[key];
-        continue;
-      }
       // 如果键值是对象则递归处理
       if (Object.prototype.toString.call(defaultOptions[key]) === "[object Object]") {
         obj[key] = recursiveAssignment(fileOptions[key], defaultOptions[key]);
@@ -29,6 +24,8 @@ function recursiveAssignment(fileOptions, defaultOptions) {
       }
     }
   }
+  // 添加全局属性
+  obj.global = defaultOptions.global;
   return obj;
 }
 
