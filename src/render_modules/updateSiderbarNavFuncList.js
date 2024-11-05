@@ -13,11 +13,14 @@ export function updateSiderbarNavFuncList(navStore) {
     id: tabIcon.id,
     disabled: tabIcon.status === 1 ? false : true,
   }));
-  // 插入特殊的三个图标数据
+  // 插入特殊图标数据
+  const arr = ["消息", "联系人", "短视频", "腾讯文档", "QQ游戏", "自选股", "腾讯网", "微云", "QQ音乐", "QQ钱包", "更多"];
   top.unshift(
-    { name: "消息", disabled: options?.sidebar?.top?.find((el) => el.name === "消息")?.disabled ?? false, id: -1 },
-    { name: "联系人", disabled: options?.sidebar?.top?.find((el) => el.name === "联系人")?.disabled ?? false, id: -1 },
-    { name: "更多", disabled: options?.sidebar?.top?.find((el) => el.name === "更多")?.disabled ?? false, id: -1 },
+    ...arr.map((name) => ({
+      name,
+      disabled: options?.sidebar?.top?.find((el) => el.name === name)?.disabled ?? false,
+      id: -1,
+    })),
   );
   // 获取侧边栏底部的功能入口
   let bottom = Array.from(document.querySelectorAll(".func-menu.sidebar__menu .func-menu__item"))
