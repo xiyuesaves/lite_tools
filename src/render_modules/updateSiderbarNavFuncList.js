@@ -14,7 +14,7 @@ export function updateSiderbarNavFuncList(navStore) {
     disabled: tabIcon.status === 1 ? false : true,
   }));
   // 插入特殊图标数据
-  const arr = ["消息", "联系人", "短视频", "腾讯文档", "QQ游戏", "自选股", "腾讯网", "微云", "QQ音乐", "QQ钱包", "更多"];
+  const arr = ["消息", "联系人", "短视频", "腾讯文档", "QQ游戏", "自选股", "腾讯网", "微云", "QQ音乐", "QQ钱包", "更多", "空间", "频道", "游戏"];
   top.unshift(
     ...arr.map((name) => ({
       name,
