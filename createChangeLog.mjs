@@ -6,6 +6,8 @@ const relesasText =
 const releaseList = [];
 
 async function getAllRelease(list = [], page = 1) {
+  writeFileSync("./changeLog.md", "由于日志过多，请到github查看");
+  return;
   const res = await fetch(`https://api.github.com/repos/xiyuesaves/LiteLoaderQQNT-lite_tools/releases?per_page=100&page=${page}`);
   const json = await res.json();
   if (typeof json.length === "number") {
