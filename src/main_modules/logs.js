@@ -3,7 +3,7 @@ import { createServer as createHttpServer } from "node:http";
 import { createServer as creatNetServer } from "node:net";
 import { readFileSync } from "node:fs";
 import superjson from "superjson";
-import manifest from "../../manifest.json";
+import manifest from "@/manifest.json";
 import { config, configEvent } from "./config.js";
 
 // 配置文件加载前缓存日志信息

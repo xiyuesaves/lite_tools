@@ -1,4 +1,4 @@
-import { extname, basename } from "path";
+import { extname, basename } from "node:path";
 import { config, onUpdateConfig } from "./config.js";
 import { Logs } from "./logs.js";
 import { RangesServer } from "./rangesServer.js";

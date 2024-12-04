@@ -16,15 +16,15 @@ const configEvent = new EventEmitter();
 /**
  * 配置合并模块
  */
-import { recursiveAssignment } from "./recursiveAssignment.js";
+import recursiveAssignment from "@/src/main_modules/recursiveAssignment.js";
 /**
  * 插件信息
  */
-import manifest from "../../manifest.json";
+import manifest from "@/manifest.json";
 /**
  * 配置模板
  */
-import configTemplate from "../config/configTemplate.json";
+import configTemplate from "@/src/config/configTemplate.json";
 
 /**
  * 日志模块
