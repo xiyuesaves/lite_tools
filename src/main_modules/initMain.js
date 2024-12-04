@@ -94,28 +94,29 @@ function initializeIPCCommunication() {
 
   // 获取用户信息事件
   ipcMain.handle("LiteLoader.lite_tools.getUserInfo", async (_, uid) => {
-    const userInfo = await new Promise((resolve) => {
-      const onEvent = (channel, ...args) => {
-        if (channel === "IPC_DOWN_2" && args[1]?.[0]?.cmdName === "onProfileSimpleChanged") {
-          mainEvent.off("ipc-send", onEvent);
-          resolve(args[1]);
-        }
-      };
+    const { promise, resolve } = Promise.withResolvers();
 
-      mainEvent.on("ipc-send", onEvent);
+    const onEvent = (channel, ...args) => {
+      if (channel === "IPC_DOWN_2" && args[1]?.[0]?.cmdName === "onProfileSimpleChanged") {
+        mainEvent.off("ipc-send", onEvent);
+        resolve(args[1]);
+      }
+    };
 
-      ipcMain.emit("IPC_UP_2", {}, { type: "request", callbackId: randomUUID(), eventName: "ns-ntApi-2" }, [
-        "nodeIKernelProfileService/fetchUserDetailInfo",
-        {
-          callFrom: "BuddyProfileStore",
-          uid: [uid],
-          source: 1,
-          bizList: [0],
-        },
-        undefined,
-      ]);
-    });
-    return userInfo;
+    mainEvent.on("ipc-send", onEvent);
+
+    ipcMain.emit("IPC_UP_2", {}, { type: "request", callbackId: randomUUID(), eventName: "ns-ntApi-2" }, [
+      "nodeIKernelProfileService/fetchUserDetailInfo",
+      {
+        callFrom: "BuddyProfileStore",
+        uid: [uid],
+        source: 1,
+        bizList: [0],
+      },
+      undefined,
+    ]);
+
+    return await promise;
   });
 
   // 跳转到指定聊天窗口的对应消息
