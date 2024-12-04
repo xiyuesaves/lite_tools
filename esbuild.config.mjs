@@ -17,6 +17,10 @@ buildSync({
   target: "node20",
   platform: "node",
   charset: "utf8",
+  minify: !isDev,
+  alias: {
+    "@": "./",
+  },
   external: ["electron", "sass"],
 });
 console.log(`主进程打包耗时：${(new Date().getTime() - thisTime) / 1000} s`);
@@ -30,6 +34,7 @@ buildSync({
   target: "es2020",
   platform: "browser",
   charset: "utf8",
+  minify: !isDev,
 });
 console.log(`debug页面打包耗时：${(new Date().getTime() - thisTime) / 1000} s`);
 
