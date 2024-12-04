@@ -1,5 +1,8 @@
 import { writeFileSync, readFileSync } from "node:fs";
 
+/**
+ * 前置配置文件
+ */
 export class BaseConfig {
   constructor(userConfigPath) {
     this.userConfigPath = userConfigPath;

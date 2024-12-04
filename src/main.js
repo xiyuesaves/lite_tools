@@ -27,6 +27,7 @@ function onBrowserWindowCreated(window) {
 
 /**
  * 将给定 Electron 浏览器窗口的 IPC 消息事件代理到添加自定义行为。
+ * 渲染进程向主进程发送消息
  *
  * @param {Electron.BrowserWindow} window - 代理其 IPC 消息事件的浏览器窗口。
  */
@@ -35,7 +36,9 @@ function proxyIpcMessage(window) {
   const ipcEventsIsArray = Array.isArray(ipcEvents);
   const ipcMessageProxy = ipcEventsIsArray ? ipcEvents[0] : ipcEvents;
 
-  if (!ipcMessageProxy) return;
+  if (!ipcMessageProxy) {
+    return;
+  }
 
   const proxyIpcMsg = new Proxy(ipcMessageProxy, {
     apply(target, thisArg, args) {
@@ -57,9 +60,9 @@ function proxyIpcMessage(window) {
 
 /**
  * 复写并监听给定 Electron 浏览器窗口中的 IPC 通信内容。
- *
+ * 主进程向渲染进程发送消息
+ * 
  * @param {Electron.BrowserWindow} window - 要代理 IPC 消息事件的浏览器窗口。
- * @return {void} 此函数不返回任何内容。
  */
 function proxySend(window) {
   const originalSend = window.webContents.send;
